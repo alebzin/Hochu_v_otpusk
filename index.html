@@ -158,63 +158,8 @@
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239ab0c7' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
         }
 
-        /* ===== фильтры ===== */
-        .filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            background: var(--bg-card);
-            padding: 10px 14px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            margin-bottom: 12px;
-            transition: background 0.3s, border-color 0.3s;
-        }
-        .filters .filter-label {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-right: 4px;
-        }
-        .filters .filter-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 4px 6px;
-        }
-        .filters .filter-options label {
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            cursor: pointer;
-            font-weight: 400;
-            font-size: 12px;
-            color: var(--text);
-            background: var(--tag-bg);
-            padding: 3px 10px;
-            border-radius: 20px;
-            border: 1px solid var(--tag-border);
-            transition: all 0.2s;
-            user-select: none;
-        }
-        .filters .filter-options label:active { transform: scale(0.95); }
-        .filters .filter-options label.active {
-            background: var(--visa-bg);
-            border-color: var(--accent);
-        }
-        .filters .filter-options label .checkmark {
-            font-size: 10px;
-            opacity: 0.3;
-            transition: opacity 0.2s;
-        }
-        .filters .filter-options label.active .checkmark { opacity: 1; }
-        .filters .filter-divider {
-            width: 1px;
-            background: var(--border);
-            flex-shrink: 0;
-        }
-
         /* ===== поиск ===== */
-        .search-container { margin-bottom: 12px; }
+        .search-container { margin-bottom: 10px; }
         .search-container input {
             width: 100%;
             background: var(--bg-card);
@@ -237,6 +182,147 @@
             opacity: 0.7;
         }
 
+        /* ===== фильтры — сворачиваемые ===== */
+        .filters-wrapper {
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .filters-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 40px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: 0.2s;
+            user-select: none;
+            width: 100%;
+            justify-content: space-between;
+            box-shadow: var(--shadow);
+        }
+        .filters-toggle:active { transform: scale(0.98); }
+        .filters-toggle .toggle-icon {
+            font-size: 16px;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .filters-toggle .toggle-icon.open { transform: rotate(180deg); }
+        .filters-toggle .filter-count {
+            background: var(--accent);
+            color: white;
+            border-radius: 30px;
+            padding: 0 10px;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 20px;
+        }
+        .filters-toggle .filter-summary {
+            font-size: 12px;
+            color: var(--text-secondary);
+            opacity: 0.7;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 1;
+            margin: 0 8px;
+        }
+
+        .filters {
+            display: none;
+            flex-wrap: wrap;
+            gap: 8px;
+            background: var(--bg-card);
+            padding: 14px 14px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            margin-top: 8px;
+            transition: background 0.3s, border-color 0.3s, opacity 0.3s, transform 0.3s;
+            box-shadow: var(--shadow);
+        }
+        .filters.open {
+            display: flex;
+            animation: filtersOpen 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes filtersOpen {
+            0% { opacity: 0; transform: translateY(-8px) scale(0.98); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .filters .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 4px 8px;
+            flex: 1 1 auto;
+            min-width: 120px;
+        }
+        .filters .filter-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
+        .filters .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 6px;
+        }
+        .filters .filter-options label {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            cursor: pointer;
+            font-weight: 400;
+            font-size: 11px;
+            color: var(--text);
+            background: var(--tag-bg);
+            padding: 2px 8px;
+            border-radius: 20px;
+            border: 1px solid var(--tag-border);
+            transition: all 0.2s;
+            user-select: none;
+        }
+        .filters .filter-options label:active { transform: scale(0.95); }
+        .filters .filter-options label.active {
+            background: var(--visa-bg);
+            border-color: var(--accent);
+        }
+        .filters .filter-options label .checkmark {
+            font-size: 9px;
+            opacity: 0.3;
+            transition: opacity 0.2s;
+        }
+        .filters .filter-options label.active .checkmark { opacity: 1; }
+        .filters .filter-divider {
+            width: 1px;
+            background: var(--border);
+            flex-shrink: 0;
+            margin: 0 2px;
+        }
+        .filters .filter-reset {
+            font-size: 11px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 2px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: var(--tag-bg);
+            transition: 0.2s;
+            font-weight: 500;
+            margin-left: auto;
+        }
+        .filters .filter-reset:active { transform: scale(0.95); }
+
+        @media (max-width: 420px) {
+            .filters .filter-group { min-width: 100%; }
+            .filters .filter-divider { display: none; }
+        }
+
         /* ===== скелетон ===== */
         .skeleton { display: flex; flex-direction: column; gap: 14px; }
         .skeleton-card {
@@ -252,7 +338,7 @@
         /* ===== сетка карточек ===== */
         .grid { display: flex; flex-direction: column; gap: 14px; margin-top: 4px; }
 
-        /* ===== анимация карточек ===== */
+        /* ===== карточки ===== */
         .country-card {
             background: var(--bg-card);
             border-radius: 24px;
@@ -858,16 +944,40 @@
             margin-top: 10px;
             border-left: 3px solid var(--accent);
         }
-        .rain-details {
+
+        .rain-details-block {
+            background: var(--detail-bg);
+            border-radius: 20px;
+            padding: 14px 16px;
+            margin: 12px 0;
+            border: 1px solid var(--detail-border);
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .rain-details-block .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid var(--detail-border);
+            font-size: 15px;
+        }
+        .rain-details-block .row:last-child { border-bottom: 0; }
+        .rain-details-block .label { color: var(--text-secondary); font-weight: 450; }
+        .rain-details-block .value {
+            font-weight: 500;
+            color: var(--text);
+            text-align: right;
+        }
+        .rain-details-block .value.rainy { color: #c0392b; font-weight: 600; }
+        [data-theme="dark"] .rain-details-block .value.rainy { color: #e8746a; }
+        .rain-details-block .rain-description {
             font-size: 13px;
             color: var(--text-secondary);
-            background: var(--detail-bg);
-            border-radius: 16px;
-            padding: 10px 14px;
-            margin-top: 8px;
-            border-left: 3px solid #4a8bc2;
+            padding-top: 8px;
+            border-top: 1px solid var(--detail-border);
+            margin-top: 6px;
             line-height: 1.5;
         }
+
         .recommend {
             margin-top: 14px;
             font-size: 14px;
@@ -876,6 +986,54 @@
             padding-top: 14px;
             line-height: 1.6;
         }
+
+        /* ===== достопримечательности ===== */
+        .sights-block {
+            background: var(--detail-bg);
+            border-radius: 20px;
+            padding: 14px 16px;
+            margin: 12px 0;
+            border: 1px solid var(--detail-border);
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .sights-block .sights-title {
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        .sights-block .sights-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 10px;
+        }
+        .sights-block .sight-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            color: var(--text);
+            background: var(--tag-bg);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--tag-border);
+        }
+        .sights-block .sight-item .sight-icon { font-size: 16px; }
+
+        /* ===== сезонность ===== */
+        .season-tag {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        .season-tag.high { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .season-tag.medium { background: #fff3cd; color: #856404; border: 1px solid #ffc107; }
+        .season-tag.low { background: #d4edda; color: #155724; border: 1px solid #b8daff; }
+        [data-theme="dark"] .season-tag.high { background: #3a1a1a; color: #df8f8f; }
+        [data-theme="dark"] .season-tag.medium { background: #3a3a1a; color: #e8d060; }
+        [data-theme="dark"] .season-tag.low { background: #1a3a2a; color: #8fdfb0; }
 
         /* ===== адаптив ===== */
         @media (max-width: 420px) {
@@ -892,13 +1050,14 @@
             .detail-temp-grid { grid-template-columns: repeat(6, 1fr); gap: 2px; }
             .detail-temp-grid .deg { font-size: 16px; }
             .month-selector select { font-size: 14px; padding: 8px 12px 8px 10px; }
-            .filters { flex-direction: column; gap: 6px; }
-            .filters .filter-divider { display: none; }
             .compare-bar { padding: 10px 12px; flex-wrap: wrap; gap: 8px; }
             .compare-bar .compare-info { font-size: 13px; }
             .compare-bar .compare-actions button { font-size: 12px; padding: 6px 12px; }
             .compare-modal { padding: 20px 16px; }
             body { padding-bottom: 90px; }
+            .filters-toggle .filter-summary { display: none; }
+            .sights-block .sights-list { gap: 4px 6px; }
+            .sights-block .sight-item { font-size: 12px; padding: 3px 10px; }
         }
 
         @media (min-width: 600px) {
@@ -920,6 +1079,7 @@
             .card-main { display: flex; flex-direction: column; }
             .flag { font-size: 40px; width: auto; text-align: left; }
             .compare-checkbox { top: 10px; right: 10px; }
+            .filters .filter-group { min-width: auto; flex: 0 1 auto; }
         }
 
         .detail-card::-webkit-scrollbar { width: 4px; }
@@ -931,6 +1091,7 @@
             .detail-card { box-shadow: none; border: 1px solid #ccc; max-height: none; }
             .detail-close, .detail-actions, .drag-handle { display: none !important; }
             .theme-toggle, .header-actions, .compare-bar, .compare-checkbox { display: none !important; }
+            .filters-wrapper { display: none !important; }
         }
 
         .empty-state {
@@ -993,55 +1154,64 @@
         <select id="monthSelect"></select>
     </div>
 
-    <!-- фильтры -->
-    <div class="filters">
-        <div class="filter-group-item">
-            <span class="filter-label">🏷️ Тип:</span>
-            <div class="filter-options" id="typeFilters">
-                <label data-value="family" class="active"><span class="checkmark">✅</span> Семья</label>
-                <label data-value="romantic" class="active"><span class="checkmark">✅</span> Романтика</label>
-                <label data-value="wellness" class="active"><span class="checkmark">✅</span> Велнес</label>
-                <label data-value="party" class="active"><span class="checkmark">✅</span> Тусовки</label>
-                <label data-value="ski" class="active"><span class="checkmark">✅</span> Лыжи</label>
-                <label data-value="yacht" class="active"><span class="checkmark">✅</span> Яхтинг</label>
-                <label data-value="culture" class="active"><span class="checkmark">✅</span> Культура</label>
-            </div>
-        </div>
-        <div class="filter-divider"></div>
-        <div class="filter-group-item">
-            <span class="filter-label">✈️ Перелёт:</span>
-            <div class="filter-options" id="flightFilters">
-                <label data-value="short" class="active"><span class="checkmark">✅</span> До 4ч</label>
-                <label data-value="medium" class="active"><span class="checkmark">✅</span> 4-7ч</label>
-                <label data-value="long" class="active"><span class="checkmark">✅</span> 8+ч</label>
-            </div>
-        </div>
-        <div class="filter-divider"></div>
-        <div class="filter-group-item">
-            <span class="filter-label">💰 Бюджет:</span>
-            <div class="filter-options" id="budgetFilters">
-                <label data-value="low" class="active"><span class="checkmark">✅</span> Низкий</label>
-                <label data-value="medium" class="active"><span class="checkmark">✅</span> Средний</label>
-                <label data-value="high" class="active"><span class="checkmark">✅</span> Высокий</label>
-            </div>
-        </div>
-        <div class="filter-divider"></div>
-        <div class="filter-group-item">
-            <span class="filter-label">🛂 Виза:</span>
-            <div class="filter-options" id="visaFilters">
-                <label data-value="Не нужна" class="active"><span class="checkmark">✅</span> Без</label>
-                <label data-value="Электронная" class="active"><span class="checkmark">✅</span> E-Visa</label>
-                <label data-value="Шенген" class="active"><span class="checkmark">✅</span> Шенген</label>
-                <label data-value="Виза" class="active"><span class="checkmark">✅</span> Виза</label>
-                <label data-value="По прибытии" class="active"><span class="checkmark">✅</span> По прил.</label>
-                <label data-value="Внутренний" class="active"><span class="checkmark">✅</span> Внут.</label>
-            </div>
-        </div>
-    </div>
-
     <!-- поиск -->
     <div class="search-container">
         <input type="text" id="searchInput" placeholder="🔍 Поиск страны или города..." />
+    </div>
+
+    <!-- фильтры — сворачиваемые -->
+    <div class="filters-wrapper">
+        <div class="filters-toggle" id="filtersToggle">
+            <span>🔍 Фильтры</span>
+            <span class="filter-summary" id="filterSummary">Все активны</span>
+            <span class="filter-count" id="filterCount">0</span>
+            <span class="toggle-icon" id="toggleIcon">▾</span>
+        </div>
+        <div class="filters" id="filtersContainer">
+            <div class="filter-group">
+                <span class="filter-label">🏷️ Тип:</span>
+                <div class="filter-options" id="typeFilters">
+                    <label data-value="family" class="active"><span class="checkmark">✅</span> Семья</label>
+                    <label data-value="romantic" class="active"><span class="checkmark">✅</span> Романтика</label>
+                    <label data-value="wellness" class="active"><span class="checkmark">✅</span> Велнес</label>
+                    <label data-value="party" class="active"><span class="checkmark">✅</span> Тусовки</label>
+                    <label data-value="ski" class="active"><span class="checkmark">✅</span> Лыжи</label>
+                    <label data-value="yacht" class="active"><span class="checkmark">✅</span> Яхтинг</label>
+                    <label data-value="culture" class="active"><span class="checkmark">✅</span> Культура</label>
+                </div>
+            </div>
+            <div class="filter-divider"></div>
+            <div class="filter-group">
+                <span class="filter-label">✈️ Перелёт:</span>
+                <div class="filter-options" id="flightFilters">
+                    <label data-value="short" class="active"><span class="checkmark">✅</span> До 4ч</label>
+                    <label data-value="medium" class="active"><span class="checkmark">✅</span> 4-7ч</label>
+                    <label data-value="long" class="active"><span class="checkmark">✅</span> 8+ч</label>
+                </div>
+            </div>
+            <div class="filter-divider"></div>
+            <div class="filter-group">
+                <span class="filter-label">💰 Бюджет:</span>
+                <div class="filter-options" id="budgetFilters">
+                    <label data-value="low" class="active"><span class="checkmark">✅</span> Низкий</label>
+                    <label data-value="medium" class="active"><span class="checkmark">✅</span> Средний</label>
+                    <label data-value="high" class="active"><span class="checkmark">✅</span> Высокий</label>
+                </div>
+            </div>
+            <div class="filter-divider"></div>
+            <div class="filter-group">
+                <span class="filter-label">🛂 Виза:</span>
+                <div class="filter-options" id="visaFilters">
+                    <label data-value="Не нужна" class="active"><span class="checkmark">✅</span> Без</label>
+                    <label data-value="Электронная" class="active"><span class="checkmark">✅</span> E-Visa</label>
+                    <label data-value="Шенген" class="active"><span class="checkmark">✅</span> Шенген</label>
+                    <label data-value="Виза" class="active"><span class="checkmark">✅</span> Виза</label>
+                    <label data-value="По прибытии" class="active"><span class="checkmark">✅</span> По прил.</label>
+                    <label data-value="Внутренний" class="active"><span class="checkmark">✅</span> Внут.</label>
+                </div>
+            </div>
+            <span class="filter-reset" id="filterReset">✕ Сбросить</span>
+        </div>
     </div>
 
     <!-- сетка -->
@@ -1090,52 +1260,58 @@
 
 <script>
     // ============================================================
-    // ДАННЫЕ (сокращены для экономии места — полная версия из предыдущих ответов)
+    // ДАННЫЕ
     // ============================================================
     const countriesData = [
-        { id: "turkey", name: "Турция", city: "Анталья", flag: "🇹🇷", currency: "TRY", visa: "Не нужна", rainSeason: "Ноя–Мар", rainDetails: "Зимой дожди затяжные, летом — редкие кратковременные грозы. Пляжный сезон — с мая по октябрь.", footnote: "", budget: "medium", flightDuration: "short", flightPrice: "250–400", typeTags: ['family', 'culture'], temps: [10,11,13,18,23,28,31,31,27,22,17,12] },
-        { id: "uae", name: "ОАЭ", city: "Дубай", flag: "🇦🇪", currency: "AED", visa: "Не нужна", rainSeason: "Нет", rainDetails: "Дожди крайне редки, в основном зимой. Летом — экстремальная жара.", footnote: "", budget: "high", flightDuration: "medium", flightPrice: "350–500", typeTags: ['family', 'party', 'yacht'], temps: [20,21,24,28,33,36,38,38,36,31,26,22] },
-        { id: "egypt", name: "Египет", city: "Хургада", flag: "🇪🇬", currency: "EGP", visa: "По прибытии", rainSeason: "Нет", rainDetails: "Дождей практически нет. Сухой пустынный климат.", footnote: "", budget: "low", flightDuration: "short", flightPrice: "200–350", typeTags: ['family', 'culture'], temps: [18,20,22,26,30,33,35,35,32,29,24,20] },
-        { id: "thailand", name: "Таиланд", city: "Пхукет", flag: "🇹🇭", currency: "THB", visa: "Не нужна", rainSeason: "Май–Окт", rainDetails: "Короткие, но сильные тропические ливни по 1-2 часа. Море может быть неспокойным.", footnote: "", budget: "medium", flightDuration: "long", flightPrice: "500–800", typeTags: ['family', 'party', 'wellness'], temps: [28,29,30,31,31,30,30,29,29,29,28,28] },
-        { id: "vietnam", name: "Вьетнам", city: "Нячанг", flag: "🇻🇳", currency: "VND", visa: "Не нужна", rainSeason: "Май–Ноя", rainDetails: "Муссонные дожди с мая по ноябрь, особенно сильные в октябре.", footnote: "безвизово до 45 дней", budget: "low", flightDuration: "long", flightPrice: "400–700", typeTags: ['family', 'culture'], temps: [26,27,28,30,31,30,29,29,28,28,27,26] },
-        { id: "maldives", name: "Мальдивы", city: "Мале", flag: "🇲🇻", currency: "MVR", visa: "Не нужна", rainSeason: "Май–Окт", rainDetails: "Дожди идут преимущественно ночью и утром, 3-5 часов. После обеда — ясное небо.", footnote: "", budget: "high", flightDuration: "long", flightPrice: "600–1000", typeTags: ['romantic', 'yacht', 'wellness'], temps: [28,28,29,30,30,29,29,28,28,28,28,28] },
-        { id: "bali", name: "Индонезия", city: "Бали", flag: "🇮🇩", currency: "IDR", visa: "По прибытии", rainSeason: "Ноя–Мар", rainDetails: "Сезон дождей — ноябрь-март, ливни сильные, но короткие.", footnote: "", budget: "medium", flightDuration: "long", flightPrice: "600–900", typeTags: ['romantic', 'wellness', 'yacht'], temps: [28,28,29,30,29,28,27,27,27,28,28,28] },
-        { id: "spain", name: "Испания", city: "Барселона", flag: "🇪🇸", currency: "EUR", visa: "Шенген", rainSeason: "–", rainDetails: "Средиземноморский климат: мягкая зима, жаркое лето.", footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "250–450", typeTags: ['culture', 'family', 'party'], temps: [9,10,13,15,19,23,26,26,23,19,13,10] },
-        { id: "italy", name: "Италия", city: "Рим", flag: "🇮🇹", currency: "EUR", visa: "Шенген", rainSeason: "–", rainDetails: "Средиземноморский климат. Дожди возможны осенью и весной.", footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "250–450", typeTags: ['culture', 'romantic'], temps: [8,9,12,15,19,23,26,26,22,18,13,9] },
-        { id: "greece", name: "Греция", city: "Афины", flag: "🇬🇷", currency: "EUR", visa: "Шенген", rainSeason: "–", rainDetails: "Средиземноморский климат. Лето — жаркое и сухое.", footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "200–400", typeTags: ['family', 'culture', 'yacht'], temps: [10,11,13,17,22,26,28,28,25,20,15,12] },
-        { id: "portugal", name: "Португалия", city: "Лиссабон", flag: "🇵🇹", currency: "EUR", visa: "Шенген", rainSeason: "–", rainDetails: "Самый тёплый Шенген зимой.", footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "250–450", typeTags: ['culture', 'family'], temps: [11,12,14,16,19,22,25,25,23,19,15,12] },
-        { id: "switzerland", name: "Швейцария", city: "Интерлакен", flag: "🇨🇭", currency: "CHF", visa: "Шенген", rainSeason: "–", rainDetails: "Альпийский климат. Зимой — горнолыжный сезон.", footnote: "", budget: "high", flightDuration: "medium", flightPrice: "300–550", typeTags: ['ski', 'wellness'], temps: [0,1,4,9,14,18,20,20,16,11,5,1] },
-        { id: "czech", name: "Чехия", city: "Прага", flag: "🇨🇿", currency: "CZK", visa: "Шенген", rainSeason: "–", rainDetails: "Умеренный климат. Лето — комфортное для прогулок.", footnote: "", budget: "low", flightDuration: "medium", flightPrice: "150–300", typeTags: ['culture', 'party'], temps: [-1,0,4,9,14,17,19,19,15,10,5,1] },
-        { id: "japan", name: "Япония", city: "Токио", flag: "🇯🇵", currency: "JPY", visa: "Виза", rainSeason: "Июнь–Июль", rainDetails: "Сезон дождей — июнь-июль. Лучшее время — весна и осень.", footnote: "оформляется через консульство", budget: "high", flightDuration: "long", flightPrice: "600–1000", typeTags: ['culture', 'romantic'], temps: [5,6,9,15,19,22,26,28,25,19,13,8] },
-        { id: "korea", name: "Южная Корея", city: "Сеул", flag: "🇰🇷", currency: "KRW", visa: "Не нужна", rainSeason: "Июль–Авг", rainDetails: "Муссонный сезон — июль-август.", footnote: "требуется K-ETA", budget: "medium", flightDuration: "long", flightPrice: "500–800", typeTags: ['culture', 'party'], temps: [-3,-1,5,12,18,22,25,26,22,15,7,0] },
-        { id: "malaysia", name: "Малайзия", city: "Куала-Лумпур", flag: "🇲🇾", currency: "MYR", visa: "Не нужна", rainSeason: "Мар–Апр, Окт–Ноя", rainDetails: "Дожди ливневые, по 15-30 минут.", footnote: "", budget: "low", flightDuration: "long", flightPrice: "450–750", typeTags: ['family', 'culture'], temps: [27,27,28,28,29,28,28,28,28,28,28,27] },
-        { id: "singapore", name: "Сингапур", city: "Сингапур", flag: "🇸🇬", currency: "SGD", visa: "Не нужна", rainSeason: "Круглый год", rainDetails: "Дожди — почти ежедневно, но кратковременные.", footnote: "", budget: "high", flightDuration: "long", flightPrice: "500–850", typeTags: ['party', 'culture'], temps: [27,27,28,28,28,28,28,28,28,28,27,27] },
-        { id: "srilanka", name: "Шри-Ланка", city: "Коломбо", flag: "🇱🇰", currency: "LKR", visa: "Электронная", rainSeason: "Май–Сен / Окт–Ноя", rainDetails: "Два муссона: на юге и на востоке.", footnote: "", budget: "low", flightDuration: "long", flightPrice: "400–700", typeTags: ['family', 'wellness', 'culture'], temps: [27,27,28,29,29,28,28,28,28,28,28,27] },
-        { id: "saudi", name: "Саудовская Аравия", city: "Эр-Рияд", flag: "🇸🇦", currency: "SAR", visa: "Не нужна", rainSeason: "–", rainDetails: "Пустыня. Летом — экстремальная жара.", footnote: "", budget: "high", flightDuration: "medium", flightPrice: "400–650", typeTags: ['culture'], temps: [14,17,21,26,32,35,36,36,33,28,21,16] },
-        { id: "uzbekistan", name: "Узбекистан", city: "Самарканд", flag: "🇺🇿", currency: "UZS", visa: "Не нужна", rainSeason: "–", rainDetails: "Резко континентальный. В июле +40° в тени!", footnote: "", budget: "low", flightDuration: "short", flightPrice: "150–300", typeTags: ['culture'], temps: [1,3,8,16,22,27,29,27,22,15,8,3] },
-        { id: "sochi", name: "Россия", city: "Сочи", flag: "🇷🇺", currency: "RUB", visa: "Внутренний", rainSeason: "–", rainDetails: "Субтропики. Море прогревается к июлю.", footnote: "", budget: "low", flightDuration: "short", flightPrice: "100–200", typeTags: ['family', 'ski', 'wellness'], temps: [5,6,9,15,20,25,27,27,23,18,13,8] },
-        { id: "georgia", name: "Грузия", city: "Батуми", flag: "🇬🇪", currency: "GEL", visa: "Не нужна", rainSeason: "Осень–Зима", rainDetails: "Осенью и зимой частые затяжные дожди.", footnote: "", budget: "low", flightDuration: "short", flightPrice: "150–300", typeTags: ['culture', 'family'], temps: [7,7,10,15,20,25,27,27,23,18,13,9] },
-        { id: "goa", name: "Индия", city: "Гоа", flag: "🇮🇳", currency: "INR", visa: "Электронная", rainSeason: "Июн–Сен", rainDetails: "С июня по сентябрь — сильные муссонные дожди.", footnote: "оформляется онлайн", budget: "low", flightDuration: "long", flightPrice: "350–550", typeTags: ['party', 'wellness'], temps: [27,28,29,30,30,28,27,27,27,28,28,27] },
-        { id: "china", name: "Китай", city: "о. Хайнань", flag: "🇨🇳", currency: "CNY", visa: "Не нужна", rainSeason: "Май–Окт", rainDetails: "Тайфуны возможны с июля по сентябрь.", footnote: "для туристических групп до 30 дней", budget: "medium", flightDuration: "long", flightPrice: "400–600", typeTags: ['family', 'wellness'], temps: [22,23,25,27,29,30,30,29,28,27,25,23] },
-        { id: "france", name: "Франция", city: "Ницца", flag: "🇫🇷", currency: "EUR", visa: "Шенген", rainSeason: "–", rainDetails: "Лазурный берег: мягкий климат.", footnote: "", budget: "high", flightDuration: "medium", flightPrice: "300–500", typeTags: ['romantic', 'culture', 'yacht'], temps: [9,10,12,15,19,22,25,25,22,18,13,10] },
-        { id: "uk", name: "Великобритания", city: "Лондон", flag: "🇬🇧", currency: "GBP", visa: "Виза", rainSeason: "Круглый год", rainDetails: "Дожди 200 дней в году. Берите зонт всегда!", footnote: "требуется отдельная виза", budget: "high", flightDuration: "medium", flightPrice: "300–550", typeTags: ['culture', 'party'], temps: [5,5,7,10,14,17,19,19,16,12,8,6] },
-        { id: "germany", name: "Германия", city: "Берлин", flag: "🇩🇪", currency: "EUR", visa: "Шенген", rainSeason: "–", rainDetails: "Умеренный климат. Дожди круглый год.", footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "200–400", typeTags: ['culture', 'party'], temps: [0,1,5,9,14,17,19,19,15,10,5,2] },
-        { id: "cambodia", name: "Камбоджа", city: "Сием-Рип", flag: "🇰🇭", currency: "KHR", visa: "Электронная", rainSeason: "Июн–Окт", rainDetails: "Сезон дождей — июнь-октябрь.", footnote: "", budget: "low", flightDuration: "long", flightPrice: "450–750", typeTags: ['culture'], temps: [27,28,29,30,30,29,29,29,29,29,28,27] },
-        { id: "philippines", name: "Филиппины", city: "Боракай", flag: "🇵🇭", currency: "PHP", visa: "Не нужна", rainSeason: "Июн–Окт", rainDetails: "Тайфуны с июня по ноябрь.", footnote: "до 30 дней", budget: "low", flightDuration: "long", flightPrice: "500–850", typeTags: ['family', 'yacht', 'party'], temps: [27,27,28,29,29,29,28,28,28,28,28,27] },
-        { id: "qatar", name: "Катар", city: "Доха", flag: "🇶🇦", currency: "QAR", visa: "Не нужна", rainSeason: "–", rainDetails: "Летом — адская жара, зимой — комфортно.", footnote: "", budget: "high", flightDuration: "medium", flightPrice: "350–550", typeTags: ['culture', 'yacht'], temps: [17,18,22,26,31,34,35,35,33,29,24,19] },
-        { id: "oman", name: "Оман", city: "Маскат", flag: "🇴🇲", currency: "OMR", visa: "Не нужна", rainSeason: "–", rainDetails: "Влажность летом +90%", footnote: "", budget: "high", flightDuration: "medium", flightPrice: "400–650", typeTags: ['yacht', 'culture'], temps: [22,23,25,28,31,33,32,31,30,29,26,23] },
-        { id: "jordan", name: "Иордания", city: "Акаба", flag: "🇯🇴", currency: "JOD", visa: "Не нужна", rainSeason: "–", rainDetails: "Красное море, дайвинг круглый год.", footnote: "до 30 дней", budget: "medium", flightDuration: "medium", flightPrice: "300–500", typeTags: ['culture', 'family'], temps: [15,17,20,25,30,33,35,35,33,28,22,17] },
-        { id: "morocco", name: "Марокко", city: "Агадир", flag: "🇲🇦", currency: "MAD", visa: "Не нужна", rainSeason: "–", rainDetails: "Океан холодный (течение).", footnote: "", budget: "low", flightDuration: "medium", flightPrice: "250–450", typeTags: ['culture', 'family'], temps: [13,14,16,17,20,22,25,25,23,21,17,14] },
-        { id: "tunisia", name: "Тунис", city: "Тунис", flag: "🇹🇳", currency: "TND", visa: "Не нужна", rainSeason: "–", rainDetails: "Средиземноморский климат.", footnote: "", budget: "low", flightDuration: "short", flightPrice: "200–350", typeTags: ['family', 'culture'], temps: [11,12,14,17,21,25,28,28,26,22,17,12] },
-        { id: "mexico", name: "Мексика", city: "Канкун", flag: "🇲🇽", currency: "MXN", visa: "Электронная", rainSeason: "Май–Окт", rainDetails: "Влажно, сезон ураганов — летом.", footnote: "", budget: "medium", flightDuration: "long", flightPrice: "700–1200", typeTags: ['family', 'party'], temps: [24,25,26,28,29,29,29,29,28,27,26,24] },
-        { id: "cuba", name: "Куба", city: "Варадеро", flag: "🇨🇺", currency: "CUP", visa: "Не нужна", rainSeason: "Май–Окт", rainDetails: "Ураганы с сентября по ноябрь.", footnote: "", budget: "medium", flightDuration: "long", flightPrice: "600–1000", typeTags: ['party', 'culture'], temps: [24,24,25,26,27,28,28,28,28,27,26,25] },
-        { id: "dominican", name: "Доминикана", city: "Пунта-Кана", flag: "🇩🇴", currency: "DOP", visa: "Не нужна", rainSeason: "Май–Окт", rainDetails: "Сезон ураганов — июнь-ноябрь.", footnote: "", budget: "medium", flightDuration: "long", flightPrice: "700–1100", typeTags: ['family', 'romantic'], temps: [26,26,26,27,28,28,29,29,29,28,27,26] },
-        { id: "kazakhstan", name: "Казахстан", city: "Алматы", flag: "🇰🇿", currency: "KZT", visa: "Не нужна", rainSeason: "–", rainDetails: "Зимой — горнолыжка.", footnote: "", budget: "low", flightDuration: "short", flightPrice: "100–250", typeTags: ['ski', 'culture'], temps: [-6,-4,2,11,17,22,25,24,18,9,2,-4] },
-        { id: "kamchatka", name: "Россия", city: "Камчатка", flag: "🇷🇺", currency: "RUB", visa: "Внутренний", rainSeason: "–", rainDetails: "Лето +14°, одеваться как зимой.", footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "300–600", typeTags: ['culture', 'wellness'], temps: [-10,-10,-6,-1,5,10,13,14,10,4,-3,-8] }
+        { id: "turkey", name: "Турция", city: "Анталья", flag: "🇹🇷", currency: "TRY", visa: "Не нужна", rainSeason: "Ноя–Мар", rainDetails: "Зимой дожди затяжные, летом — редкие кратковременные грозы. Пляжный сезон — с мая по октябрь.", waterTemps: [17,17,18,20,23,26,28,28,27,24,21,18], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "", budget: "medium", flightDuration: "short", flightPrice: "250–400", typeTags: ['family', 'culture'], sights: ['🏔️ Памуккале', '🏛️ Калеичи', '🕌 Голубая мечеть'], temps: [10,11,13,18,23,28,31,31,27,22,17,12] },
+        { id: "uae", name: "ОАЭ", city: "Дубай", flag: "🇦🇪", currency: "AED", visa: "Не нужна", rainSeason: "Нет", rainDetails: "Дожди крайне редки, в основном зимой. Летом — экстремальная жара.", waterTemps: [20,20,22,24,28,31,33,33,32,29,26,23], seasons: ['high','high','medium','medium','low','low','low','low','low','medium','high','high'], footnote: "", budget: "high", flightDuration: "medium", flightPrice: "350–500", typeTags: ['family', 'party', 'yacht'], sights: ['🌆 Бурдж-Халифа', '🕌 Мечеть Шейха Зайда', '🏜️ Сафари в пустыне'], temps: [20,21,24,28,33,36,38,38,36,31,26,22] },
+        { id: "egypt", name: "Египет", city: "Хургада", flag: "🇪🇬", currency: "EGP", visa: "По прибытии", rainSeason: "Нет", rainDetails: "Дождей практически нет. Сухой пустынный климат.", waterTemps: [21,21,22,23,25,27,28,29,28,27,25,23], seasons: ['high','high','medium','medium','low','low','low','low','low','medium','high','high'], footnote: "", budget: "low", flightDuration: "short", flightPrice: "200–350", typeTags: ['family', 'culture'], sights: ['🐠 Коралловый риф', '⛵ Национальный парк', '🏛️ Луксор'], temps: [18,20,22,26,30,33,35,35,32,29,24,20] },
+        { id: "thailand", name: "Таиланд", city: "Пхукет", flag: "🇹🇭", currency: "THB", visa: "Не нужна", rainSeason: "Май–Окт", rainDetails: "Короткие, но сильные тропические ливни по 1-2 часа. Море может быть неспокойным.", waterTemps: [28,29,29,30,30,29,29,29,29,29,29,28], seasons: ['high','high','high','high','medium','low','low','low','medium','high','high','high'], footnote: "", budget: "medium", flightDuration: "long", flightPrice: "500–800", typeTags: ['family', 'party', 'wellness'], sights: ['🏝️ Пхи-Пхи', '🐘 Слоновий питомник', '🌅 Пляж Патонг'], temps: [28,29,30,31,31,30,30,29,29,29,28,28] },
+        { id: "vietnam", name: "Вьетнам", city: "Нячанг", flag: "🇻🇳", currency: "VND", visa: "Не нужна", rainSeason: "Май–Ноя", rainDetails: "Муссонные дожди с мая по ноябрь, особенно сильные в октябре.", waterTemps: [24,24,25,27,29,30,30,30,29,27,26,24], seasons: ['high','high','high','high','medium','low','low','low','medium','high','high','high'], footnote: "безвизово до 45 дней", budget: "low", flightDuration: "long", flightPrice: "400–700", typeTags: ['family', 'culture'], sights: ['🏖️ Пляж Нячанг', '🏔️ Далат', '🐠 Остров Хонг'], temps: [26,27,28,30,31,30,29,29,28,28,27,26] },
+        { id: "maldives", name: "Мальдивы", city: "Мале", flag: "🇲🇻", currency: "MVR", visa: "Не нужна", rainSeason: "Май–Окт", rainDetails: "Дожди идут преимущественно ночью и утром, 3-5 часов. После обеда — ясное небо.", waterTemps: [28,28,29,30,30,29,29,28,28,28,28,28], seasons: ['high','high','high','high','medium','low','low','low','medium','high','high','high'], footnote: "", budget: "high", flightDuration: "long", flightPrice: "600–1000", typeTags: ['romantic', 'yacht', 'wellness'], sights: ['🏝️ Атоллы', '🤿 Дайвинг', '🌅 Закат с дельфинами'], temps: [28,28,29,30,30,29,29,28,28,28,28,28] },
+        { id: "bali", name: "Индонезия", city: "Бали", flag: "🇮🇩", currency: "IDR", visa: "По прибытии", rainSeason: "Ноя–Мар", rainDetails: "Сезон дождей — ноябрь-март, ливни сильные, но короткие.", waterTemps: [28,28,29,29,29,28,27,27,27,28,28,28], seasons: ['high','high','high','high','medium','low','low','low','medium','high','high','high'], footnote: "", budget: "medium", flightDuration: "long", flightPrice: "600–900", typeTags: ['romantic', 'wellness', 'yacht'], sights: ['🌾 Рисовые террасы', '🕉️ Пура Улун-Дану', '🏄‍♂️ Серфинг на Куте'], temps: [28,28,29,30,29,28,27,27,27,28,28,28] },
+        { id: "spain", name: "Испания", city: "Барселона", flag: "🇪🇸", currency: "EUR", visa: "Шенген", rainSeason: "–", rainDetails: "Средиземноморский климат: мягкая зима, жаркое лето.", waterTemps: [14,13,14,16,19,22,25,26,25,22,18,15], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "250–450", typeTags: ['culture', 'family', 'party'], sights: ['🕌 Саграда Фамилия', '🏛️ Парк Гуэля', '⚽ Камп Ноу'], temps: [9,10,13,15,19,23,26,26,23,19,13,10] },
+        { id: "italy", name: "Италия", city: "Рим", flag: "🇮🇹", currency: "EUR", visa: "Шенген", rainSeason: "–", rainDetails: "Средиземноморский климат. Дожди возможны осенью и весной.", waterTemps: [15,14,15,17,20,23,26,27,25,22,18,16], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "250–450", typeTags: ['culture', 'romantic'], sights: ['🏛️ Колизей', '⛲ Фонтан Треви', '🇻🇦 Ватикан'], temps: [8,9,12,15,19,23,26,26,22,18,13,9] },
+        { id: "greece", name: "Греция", city: "Афины", flag: "🇬🇷", currency: "EUR", visa: "Шенген", rainSeason: "–", rainDetails: "Средиземноморский климат. Лето — жаркое и сухое.", waterTemps: [16,15,16,18,21,24,26,27,25,23,20,17], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "200–400", typeTags: ['family', 'culture', 'yacht'], sights: ['🏛️ Акрополь', '🏝️ Миконос', '⛵ Афинская Ривьера'], temps: [10,11,13,17,22,26,28,28,25,20,15,12] },
+        { id: "portugal", name: "Португалия", city: "Лиссабон", flag: "🇵🇹", currency: "EUR", visa: "Шенген", rainSeason: "–", rainDetails: "Самый тёплый Шенген зимой.", waterTemps: [15,15,16,17,19,21,22,23,22,20,18,16], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "250–450", typeTags: ['culture', 'family'], sights: ['🏰 Башня Белен', '🚋 Трамвай 28', '🏖️ Кашкайш'], temps: [11,12,14,16,19,22,25,25,23,19,15,12] },
+        { id: "switzerland", name: "Швейцария", city: "Интерлакен", flag: "🇨🇭", currency: "CHF", visa: "Шенген", rainSeason: "–", rainDetails: "Альпийский климат. Зимой — горнолыжный сезон.", waterTemps: [4,3,4,7,12,16,19,19,16,12,8,5], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "", budget: "high", flightDuration: "medium", flightPrice: "300–550", typeTags: ['ski', 'wellness'], sights: ['🏔️ Юнгфрау', '🌊 Озеро Тун', '⛷️ Гриндельвальд'], temps: [0,1,4,9,14,18,20,20,16,11,5,1] },
+        { id: "czech", name: "Чехия", city: "Прага", flag: "🇨🇿", currency: "CZK", visa: "Шенген", rainSeason: "–", rainDetails: "Умеренный климат. Лето — комфортное для прогулок.", waterTemps: [4,4,6,10,15,18,20,20,17,13,8,5], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "", budget: "low", flightDuration: "medium", flightPrice: "150–300", typeTags: ['culture', 'party'], sights: ['🏰 Пражский Град', '🌉 Карлов мост', '🍺 Староместская площадь'], temps: [-1,0,4,9,14,17,19,19,15,10,5,1] },
+        { id: "japan", name: "Япония", city: "Токио", flag: "🇯🇵", currency: "JPY", visa: "Виза", rainSeason: "Июнь–Июль", rainDetails: "Сезон дождей — июнь-июль. Лучшее время — весна и осень.", waterTemps: [14,14,16,18,21,23,25,27,26,23,20,17], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "оформляется через консульство", budget: "high", flightDuration: "long", flightPrice: "600–1000", typeTags: ['culture', 'romantic'], sights: ['🌸 Цветение сакуры', '🗼 Токийская башня', '🕯️ Храм Сэнсодзи'], temps: [5,6,9,15,19,22,26,28,25,19,13,8] },
+        { id: "korea", name: "Южная Корея", city: "Сеул", flag: "🇰🇷", currency: "KRW", visa: "Не нужна", rainSeason: "Июль–Авг", rainDetails: "Муссонный сезон — июль-август.", waterTemps: [11,10,11,14,18,21,24,26,24,21,17,13], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "требуется K-ETA", budget: "medium", flightDuration: "long", flightPrice: "500–800", typeTags: ['culture', 'party'], sights: ['🏯 Дворец Кёнбоккун', '🏙️ Район Хондэ', '🌉 Мост Банпо'], temps: [-3,-1,5,12,18,22,25,26,22,15,7,0] },
+        { id: "malaysia", name: "Малайзия", city: "Куала-Лумпур", flag: "🇲🇾", currency: "MYR", visa: "Не нужна", rainSeason: "Мар–Апр, Окт–Ноя", rainDetails: "Дожди ливневые, по 15-30 минут.", waterTemps: [28,28,29,30,30,30,29,29,29,29,29,28], seasons: ['medium','medium','medium','high','high','high','high','high','high','high','medium','medium'], footnote: "", budget: "low", flightDuration: "long", flightPrice: "450–750", typeTags: ['family', 'culture'], sights: ['🗼 Башни Петронас', '🌺 Ботанический сад', '🕌 Мечеть Джамек'], temps: [27,27,28,28,29,28,28,28,28,28,28,27] },
+        { id: "singapore", name: "Сингапур", city: "Сингапур", flag: "🇸🇬", currency: "SGD", visa: "Не нужна", rainSeason: "Круглый год", rainDetails: "Дожди — почти ежедневно, но кратковременные.", waterTemps: [27,27,28,29,29,29,29,29,29,29,29,27], seasons: ['medium','medium','medium','high','high','high','high','high','high','high','medium','medium'], footnote: "", budget: "high", flightDuration: "long", flightPrice: "500–850", typeTags: ['party', 'culture'], sights: ['🌳 Сады у залива', '🦁 Мерион', '🎡 Сингапурское колесо'], temps: [27,27,28,28,28,28,28,28,28,28,27,27] },
+        { id: "srilanka", name: "Шри-Ланка", city: "Коломбо", flag: "🇱🇰", currency: "LKR", visa: "Электронная", rainSeason: "Май–Сен / Окт–Ноя", rainDetails: "Два муссона: на юге и на востоке.", waterTemps: [27,27,28,29,29,28,28,28,28,28,28,27], seasons: ['high','high','high','high','medium','low','low','low','medium','high','high','high'], footnote: "", budget: "low", flightDuration: "long", flightPrice: "400–700", typeTags: ['family', 'wellness', 'culture'], sights: ['🕍 Храм Гангарама', '🐘 Сигирия', '🏖️ Мирисса'], temps: [27,27,28,29,29,28,28,28,28,28,28,27] },
+        { id: "saudi", name: "Саудовская Аравия", city: "Эр-Рияд", flag: "🇸🇦", currency: "SAR", visa: "Не нужна", rainSeason: "–", rainDetails: "Пустыня. Летом — экстремальная жара.", waterTemps: [20,21,23,26,29,31,33,33,32,29,25,22], seasons: ['high','high','medium','medium','low','low','low','low','low','medium','high','high'], footnote: "", budget: "high", flightDuration: "medium", flightPrice: "400–650", typeTags: ['culture'], sights: ['🗼 Kingdom Centre', '🏛️ Музей истории', '🏜️ Пустыня Руб-эль-Хали'], temps: [14,17,21,26,32,35,36,36,33,28,21,16] },
+        { id: "uzbekistan", name: "Узбекистан", city: "Самарканд", flag: "🇺🇿", currency: "UZS", visa: "Не нужна", rainSeason: "–", rainDetails: "Резко континентальный. В июле +40° в тени!", waterTemps: [4,5,10,16,22,27,29,27,22,16,10,5], seasons: ['low','low','medium','medium','high','high','high','high','medium','medium','low','low'], footnote: "", budget: "low", flightDuration: "short", flightPrice: "150–300", typeTags: ['culture'], sights: ['🏛️ Площадь Регистан', '🕌 Мечеть Биби-Ханым', '⚰️ Мавзолей Гур-Эмир'], temps: [1,3,8,16,22,27,29,27,22,15,8,3] },
+        { id: "sochi", name: "Россия", city: "Сочи", flag: "🇷🇺", currency: "RUB", visa: "Внутренний", rainSeason: "–", rainDetails: "Субтропики. Море прогревается к июлю.", waterTemps: [10,10,11,14,18,22,25,26,24,20,16,12], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "", budget: "low", flightDuration: "short", flightPrice: "100–200", typeTags: ['family', 'ski', 'wellness'], sights: ['🏔️ Красная Поляна', '🌳 Дендрарий', '⛵ Морской порт'], temps: [5,6,9,15,20,25,27,27,23,18,13,8] },
+        { id: "georgia", name: "Грузия", city: "Батуми", flag: "🇬🇪", currency: "GEL", visa: "Не нужна", rainSeason: "Осень–Зима", rainDetails: "Осенью и зимой частые затяжные дожди.", waterTemps: [9,8,9,12,17,21,24,25,23,19,15,11], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "", budget: "low", flightDuration: "short", flightPrice: "150–300", typeTags: ['culture', 'family'], sights: ['🏙️ Старый Батуми', '🌿 Ботанический сад', '🍷 Кахетия'], temps: [7,7,10,15,20,25,27,27,23,18,13,9] },
+        { id: "goa", name: "Индия", city: "Гоа", flag: "🇮🇳", currency: "INR", visa: "Электронная", rainSeason: "Июн–Сен", rainDetails: "С июня по сентябрь — сильные муссонные дожди.", waterTemps: [27,27,28,29,29,28,27,27,27,28,28,27], seasons: ['high','high','high','high','medium','low','low','low','medium','high','high','high'], footnote: "оформляется онлайн", budget: "low", flightDuration: "long", flightPrice: "350–550", typeTags: ['party', 'wellness'], sights: ['🏖️ Пляж Анджуна', '🕉️ Храм Махадева', '🎨 Рынок Гипсленд'], temps: [27,28,29,30,30,28,27,27,27,28,28,27] },
+        { id: "china", name: "Китай", city: "о. Хайнань", flag: "🇨🇳", currency: "CNY", visa: "Не нужна", rainSeason: "Май–Окт", rainDetails: "Тайфуны возможны с июля по сентябрь.", waterTemps: [22,22,24,26,28,29,29,29,28,27,25,23], seasons: ['high','high','high','high','medium','low','low','low','medium','high','high','high'], footnote: "для туристических групп до 30 дней", budget: "medium", flightDuration: "long", flightPrice: "400–600", typeTags: ['family', 'wellness'], sights: ['🏝️ Санья', '🌴 Парк тропических растений', '🐠 Дайвинг'], temps: [22,23,25,27,29,30,30,29,28,27,25,23] },
+        { id: "france", name: "Франция", city: "Ницца", flag: "🇫🇷", currency: "EUR", visa: "Шенген", rainSeason: "–", rainDetails: "Лазурный берег: мягкий климат.", waterTemps: [13,13,14,16,19,22,24,25,23,20,17,15], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "", budget: "high", flightDuration: "medium", flightPrice: "300–500", typeTags: ['romantic', 'culture', 'yacht'], sights: ['🌊 Променад Англе', '🎨 Музей Матисса', '🏰 Старый город'], temps: [9,10,12,15,19,22,25,25,22,18,13,10] },
+        { id: "uk", name: "Великобритания", city: "Лондон", flag: "🇬🇧", currency: "GBP", visa: "Виза", rainSeason: "Круглый год", rainDetails: "Дожди 200 дней в году. Берите зонт всегда!", waterTemps: [7,7,8,10,13,16,18,19,17,14,11,8], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "требуется отдельная виза", budget: "high", flightDuration: "medium", flightPrice: "300–550", typeTags: ['culture', 'party'], sights: ['🏰 Букингемский дворец', '🎡 Лондонский глаз', '🕰️ Биг-Бен'], temps: [5,5,7,10,14,17,19,19,16,12,8,6] },
+        { id: "germany", name: "Германия", city: "Берлин", flag: "🇩🇪", currency: "EUR", visa: "Шенген", rainSeason: "–", rainDetails: "Умеренный климат. Дожди круглый год.", waterTemps: [2,2,4,8,13,17,19,20,17,13,7,3], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "200–400", typeTags: ['culture', 'party'], sights: ['🏛️ Бранденбургские ворота', '🗿 Музейный остров', '🎨 Берлинская стена'], temps: [0,1,5,9,14,17,19,19,15,10,5,2] },
+        { id: "cambodia", name: "Камбоджа", city: "Сием-Рип", flag: "🇰🇭", currency: "KHR", visa: "Электронная", rainSeason: "Июн–Окт", rainDetails: "Сезон дождей — июнь-октябрь.", waterTemps: [26,27,28,29,29,29,29,29,29,28,27,26], seasons: ['high','high','high','high','medium','low','low','low','medium','high','high','high'], footnote: "", budget: "low", flightDuration: "long", flightPrice: "450–750", typeTags: ['culture'], sights: ['🏛️ Ангкор-Ват', '🌳 Храм Та-Пром', '🎭 Апсара-театр'], temps: [27,28,29,30,30,29,29,29,29,29,28,27] },
+        { id: "philippines", name: "Филиппины", city: "Боракай", flag: "🇵🇭", currency: "PHP", visa: "Не нужна", rainSeason: "Июн–Окт", rainDetails: "Тайфуны с июня по ноябрь.", waterTemps: [26,27,28,29,29,29,29,29,29,28,27,26], seasons: ['high','high','high','high','medium','low','low','low','medium','high','high','high'], footnote: "до 30 дней", budget: "low", flightDuration: "long", flightPrice: "500–850", typeTags: ['family', 'yacht', 'party'], sights: ['🏖️ Белый пляж', '🏝️ Остров Кристалл', '🐠 Снорклинг'], temps: [27,27,28,29,29,29,28,28,28,28,28,27] },
+        { id: "qatar", name: "Катар", city: "Доха", flag: "🇶🇦", currency: "QAR", visa: "Не нужна", rainSeason: "–", rainDetails: "Летом — адская жара, зимой — комфортно.", waterTemps: [18,19,21,24,28,31,33,33,32,29,25,21], seasons: ['high','high','medium','medium','low','low','low','low','low','medium','high','high'], footnote: "", budget: "high", flightDuration: "medium", flightPrice: "350–550", typeTags: ['culture', 'yacht'], sights: ['🕌 Музей исламского искусства', '🌊 Набережная Корниш', '🎡 Аква-парк'], temps: [17,18,22,26,31,34,35,35,33,29,24,19] },
+        { id: "oman", name: "Оман", city: "Маскат", flag: "🇴🇲", currency: "OMR", visa: "Не нужна", rainSeason: "–", rainDetails: "Влажность летом +90%", waterTemps: [22,22,23,26,28,30,30,29,29,28,26,23], seasons: ['high','high','medium','medium','low','low','low','low','low','medium','high','high'], footnote: "", budget: "high", flightDuration: "medium", flightPrice: "400–650", typeTags: ['yacht', 'culture'], sights: ['🕌 Большая мечеть', '🏛️ Старый город', '🐠 Дайвинг на островах'], temps: [22,23,25,28,31,33,32,31,30,29,26,23] },
+        { id: "jordan", name: "Иордания", city: "Акаба", flag: "🇯🇴", currency: "JOD", visa: "Не нужна", rainSeason: "–", rainDetails: "Красное море, дайвинг круглый год.", waterTemps: [20,20,21,23,25,27,28,29,28,27,24,21], seasons: ['high','high','medium','medium','low','low','low','low','low','medium','high','high'], footnote: "до 30 дней", budget: "medium", flightDuration: "medium", flightPrice: "300–500", typeTags: ['culture', 'family'], sights: ['🏛️ Петра', '🏜️ Пустыня Вади-Рам', '🐠 Дайвинг в Красном море'], temps: [15,17,20,25,30,33,35,35,33,28,22,17] },
+        { id: "morocco", name: "Марокко", city: "Агадир", flag: "🇲🇦", currency: "MAD", visa: "Не нужна", rainSeason: "–", rainDetails: "Океан холодный (течение).", waterTemps: [16,16,17,18,19,20,21,22,21,20,18,17], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "", budget: "low", flightDuration: "medium", flightPrice: "250–450", typeTags: ['culture', 'family'], sights: ['🏜️ Сахара', '🕌 Марракеш', '🎨 Голубой город Шефшауэн'], temps: [13,14,16,17,20,22,25,25,23,21,17,14] },
+        { id: "tunisia", name: "Тунис", city: "Тунис", flag: "🇹🇳", currency: "TND", visa: "Не нужна", rainSeason: "–", rainDetails: "Средиземноморский климат.", waterTemps: [15,15,16,18,20,23,26,27,25,23,20,16], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "", budget: "low", flightDuration: "short", flightPrice: "200–350", typeTags: ['family', 'culture'], sights: ['🏛️ Карфаген', '🏜️ Сахара', '🕌 Мечеть Зитуна'], temps: [11,12,14,17,21,25,28,28,26,22,17,12] },
+        { id: "mexico", name: "Мексика", city: "Канкун", flag: "🇲🇽", currency: "MXN", visa: "Электронная", rainSeason: "Май–Окт", rainDetails: "Влажно, сезон ураганов — летом.", waterTemps: [26,26,27,28,28,29,29,29,29,28,27,26], seasons: ['high','high','high','high','medium','low','low','low','medium','high','high','high'], footnote: "", budget: "medium", flightDuration: "long", flightPrice: "700–1200", typeTags: ['family', 'party'], sights: ['🏛️ Чичен-Ица', '🌊 Сенот', '🏖️ Пляж Плайя-дель-Кармен'], temps: [24,25,26,28,29,29,29,29,28,27,26,24] },
+        { id: "cuba", name: "Куба", city: "Варадеро", flag: "🇨🇺", currency: "CUP", visa: "Не нужна", rainSeason: "Май–Окт", rainDetails: "Ураганы с сентября по ноябрь.", waterTemps: [24,24,25,26,27,28,29,29,29,28,27,25], seasons: ['high','high','high','high','medium','low','low','low','medium','high','high','high'], footnote: "", budget: "medium", flightDuration: "long", flightPrice: "600–1000", typeTags: ['party', 'culture'], sights: ['🏖️ Пляж Варадеро', '🏛️ Гавана-Вьеха', '🚗 Американские ретро-авто'], temps: [24,24,25,26,27,28,28,28,28,27,26,25] },
+        { id: "dominican", name: "Доминикана", city: "Пунта-Кана", flag: "🇩🇴", currency: "DOP", visa: "Не нужна", rainSeason: "Май–Окт", rainDetails: "Сезон ураганов — июнь-ноябрь.", waterTemps: [26,26,26,27,28,28,29,29,29,28,27,26], seasons: ['high','high','high','high','medium','low','low','low','medium','high','high','high'], footnote: "", budget: "medium", flightDuration: "long", flightPrice: "700–1100", typeTags: ['family', 'romantic'], sights: ['🏖️ Пляж Баваро', '🏝️ Остров Саона', '⛵ Катамаран'], temps: [26,26,26,27,28,28,29,29,29,28,27,26] },
+        { id: "kazakhstan", name: "Казахстан", city: "Алматы", flag: "🇰🇿", currency: "KZT", visa: "Не нужна", rainSeason: "–", rainDetails: "Зимой — горнолыжка.", waterTemps: [3,3,6,11,16,20,23,22,18,12,7,4], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "", budget: "low", flightDuration: "short", flightPrice: "100–250", typeTags: ['ski', 'culture'], sights: ['🏔️ Каток Медео', '🏛️ Зелёный базар', '⛰️ Кок-Тобе'], temps: [-6,-4,2,11,17,22,25,24,18,9,2,-4] },
+        { id: "kamchatka", name: "Россия", city: "Камчатка", flag: "🇷🇺", currency: "RUB", visa: "Внутренний", rainSeason: "–", rainDetails: "Лето +14°, одеваться как зимой.", waterTemps: [0,0,1,3,5,8,10,11,10,7,3,1], seasons: ['low','low','low','low','low','medium','high','high','medium','low','low','low'], footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "300–600", typeTags: ['culture', 'wellness'], sights: ['🌋 Вулканы', '🐻 Долина гейзеров', '🐟 Лососевая рыбалка'], temps: [-10,-10,-6,-1,5,10,13,14,10,4,-3,-8] }
     ];
 
     const monthNames = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
     const monthShort = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
+
+    const seasonLabels = {
+        high: '🔴 Высокий (дорого)',
+        medium: '🟡 Средний',
+        low: '🟢 Низкий (дешево)'
+    };
 
     const countryTips = {
         'Турция': 'Попробуйте турецкий завтрак, посетите Памуккале. В Анталье съездите в Калеичи.',
@@ -1287,10 +1463,55 @@
     const compareContent = document.getElementById('compareContent');
     const compareClose = document.getElementById('compareClose');
 
+    const filtersToggle = document.getElementById('filtersToggle');
+    const filtersContainer = document.getElementById('filtersContainer');
+    const toggleIcon = document.getElementById('toggleIcon');
+    const filterSummary = document.getElementById('filterSummary');
+    const filterCount = document.getElementById('filterCount');
+    const filterReset = document.getElementById('filterReset');
+
     let compareList = [];
     let filteredData = [...countriesData];
     let isDarkTheme = localStorage.getItem('theme') === 'dark';
     let renderTimeout = null;
+    let filtersOpen = false;
+
+    // ===== Сворачивание фильтров =====
+    filtersToggle.addEventListener('click', () => {
+        filtersOpen = !filtersOpen;
+        filtersContainer.classList.toggle('open', filtersOpen);
+        toggleIcon.classList.toggle('open', filtersOpen);
+    });
+
+    filterReset.addEventListener('click', () => {
+        document.querySelectorAll('#filtersContainer .filter-options label').forEach(label => {
+            label.classList.add('active');
+        });
+        updateFilterSummary();
+        onFilterChange();
+    });
+
+    function updateFilterSummary() {
+        let totalActive = 0;
+        let summaryParts = [];
+        document.querySelectorAll('#filtersContainer .filter-options').forEach(group => {
+            const active = group.querySelectorAll('label.active');
+            if (active.length > 0) {
+                totalActive += active.length;
+                const names = Array.from(active).map(l => l.textContent.trim().replace('✅', '').trim());
+                const label = group.closest('.filter-group').querySelector('.filter-label').textContent.trim();
+                summaryParts.push(`${label} ${names.join(', ')}`);
+            }
+        });
+        filterCount.textContent = totalActive;
+        if (totalActive === 0) {
+            filterSummary.textContent = 'Все выключены';
+        } else if (totalActive > 8) {
+            filterSummary.textContent = `${totalActive} фильтров активны`;
+        } else {
+            filterSummary.textContent = summaryParts.join(' · ');
+        }
+    }
 
     // ===== Фильтры =====
     function getActiveFilterValues(container) {
@@ -1298,11 +1519,17 @@
         container.querySelectorAll('label.active').forEach(label => selected.push(label.dataset.value));
         return selected;
     }
-    function toggleFilterLabel(label) { label.classList.toggle('active'); }
+    function toggleFilterLabel(label) { 
+        label.classList.toggle('active');
+        updateFilterSummary();
+    }
 
-    document.querySelectorAll('#filters .filter-options').forEach(container => {
+    document.querySelectorAll('#filtersContainer .filter-options').forEach(container => {
         container.querySelectorAll('label').forEach(label => {
-            label.addEventListener('click', () => { toggleFilterLabel(label); onFilterChange(); });
+            label.addEventListener('click', () => { 
+                toggleFilterLabel(label); 
+                onFilterChange(); 
+            });
         });
     });
 
@@ -1373,6 +1600,7 @@
             sorted.forEach(c => { grid.appendChild(createCard(c, monthIndex)); });
         }
         updateCompareUI();
+        updateFilterSummary();
     }
 
     // ===== Создание карточки =====
@@ -1506,18 +1734,22 @@
         let html = '<div class="compare-grid">';
         items.forEach(c => {
             const temp = c.temps[monthIndex];
+            const waterTemp = c.waterTemps[monthIndex];
             const rainy = isRainyMonth(c.rainSeason, monthIndex);
             const icon = getWeatherIcon(temp, c.rainSeason, monthIndex);
             const rate = getCurrencyRate(c.currency);
             const budgetLabels = { low: '🟢 Низкий', medium: '🟡 Средний', high: '🔴 Высокий' };
+            const season = c.seasons[monthIndex];
             html += `
                 <div class="compare-item">
                     <div class="ci-flag">${c.flag}</div>
                     <div class="ci-name">${c.name}</div>
                     <div class="ci-city">${c.city}</div>
-                    <div class="ci-row"><span class="ci-label">🌡️ ${monthNames[monthIndex]}</span><span class="ci-value">${temp}°C ${icon}</span></div>
+                    <div class="ci-row"><span class="ci-label">🌡️ Воздух</span><span class="ci-value">${temp}°C ${icon}</span></div>
+                    <div class="ci-row"><span class="ci-label">🌊 Вода</span><span class="ci-value">${waterTemp}°C</span></div>
                     <div class="ci-row"><span class="ci-label">💧 Дожди</span><span class="ci-value ${rainy ? 'rainy' : ''}">${c.rainSeason}</span></div>
                     ${c.rainDetails ? `<div style="font-size:12px;color:var(--text-secondary);padding:4px 0 0;line-height:1.4;">${c.rainDetails}</div>` : ''}
+                    <div class="ci-row"><span class="ci-label">🏨 Сезон</span><span class="ci-value"><span class="season-tag ${season}">${seasonLabels[season]}</span></span></div>
                     <div class="ci-row"><span class="ci-label">🛂 Виза</span><span class="ci-value">${c.visa}</span></div>
                     <div class="ci-row"><span class="ci-label">💰 Валюта</span><span class="ci-value">${c.currency} (≈ ${rate} ₽)</span></div>
                     <div class="ci-row"><span class="ci-label">💳 Бюджет</span><span class="ci-value">${budgetLabels[c.budget] || '–'}</span></div>
@@ -1549,21 +1781,37 @@
         const monthIndex = parseInt(monthSelect.value);
         const monthName = monthNames[monthIndex];
         const temp = c.temps[monthIndex];
+        const waterTemp = c.waterTemps[monthIndex];
         const rainy = isRainyMonth(c.rainSeason, monthIndex);
         const icon = getWeatherIcon(temp, c.rainSeason, monthIndex);
         const rate = getCurrencyRate(c.currency);
+        const season = c.seasons[monthIndex];
 
         let monthGrid = '<div class="detail-temp-grid">';
         monthNames.forEach((m, i) => {
             const ico = getWeatherIcon(c.temps[i], c.rainSeason, i);
             const rainNow = isRainyMonth(c.rainSeason, i);
             const badge = rainNow ? ' <span class="rain-badge">🌧️</span>' : '';
-            monthGrid += `<div><div class="month">${monthShort[i]}</div><div class="icon-sm">${ico}</div><div class="deg">${c.temps[i]}° ${badge}</div></div>`;
+            const wt = c.waterTemps[i];
+            monthGrid += `<div><div class="month">${monthShort[i]}</div><div class="icon-sm">${ico}</div><div class="deg">${c.temps[i]}°${badge}</div><div style="font-size:10px;color:var(--text-secondary);">🌊${wt}°</div></div>`;
         });
         monthGrid += '</div>';
 
         const budgetLabels = { low: '🟢 Низкий', medium: '🟡 Средний', high: '🔴 Высокий' };
         const countryTip = countryTips[c.name] || '';
+
+        // Достопримечательности
+        let sightsHtml = '';
+        if (c.sights && c.sights.length > 0) {
+            sightsHtml = `
+                <div class="sights-block">
+                    <div class="sights-title">🏛️ Топ-3 достопримечательности</div>
+                    <div class="sights-list">
+                        ${c.sights.map(s => `<span class="sight-item"><span class="sight-icon">${s.split(' ')[0]}</span> ${s.split(' ').slice(1).join(' ')}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+        }
 
         let recommendText = '';
         if (temp > 30) recommendText = `В ${monthName} очень жарко! Берите воду и планируйте экскурсии на утро.`;
@@ -1577,9 +1825,11 @@
         detailContent.innerHTML = `
             <div class="detail-flag">${c.flag}</div>
             <div class="detail-name">${c.name}</div>
-            <div class="detail-sub">${c.city} · ${monthName} ${temp}° ${icon}</div>
+            <div class="detail-sub">${c.city} · ${monthName} 🌡️${temp}° ${icon} · 🌊${waterTemp}°</div>
             <div class="detail-block">
-                <div class="row"><span class="label">🌡️ Месяц</span><span class="value">${temp}°C ${icon}</span></div>
+                <div class="row"><span class="label">🌡️ Воздух</span><span class="value">${temp}°C ${icon}</span></div>
+                <div class="row"><span class="label">🌊 Вода</span><span class="value">${waterTemp}°C</span></div>
+                <div class="row"><span class="label">🏨 Сезон</span><span class="value"><span class="season-tag ${season}">${seasonLabels[season]}</span></span></div>
                 <div class="row"><span class="label">🛂 Виза</span><span class="value">${c.visa} ${c.footnote ? `<span class="visa-detail">${c.footnote}</span>` : ''}</span></div>
                 <div class="row"><span class="label">💰 Валюта</span><span class="value">${c.currency} (≈ ${rate} ₽)</span></div>
                 <div class="row"><span class="label">💳 Бюджет</span><span class="value">${budgetLabels[c.budget] || '–'}</span></div>
@@ -1587,15 +1837,19 @@
                 <div class="row"><span class="label">✈️ Билет</span><span class="value">${c.flightPrice} $</span></div>
                 <div class="row"><span class="label">🏷️ Тип</span><span class="value" style="font-size:13px;">${c.typeTags.map(t => typeLabels[t] || t).join(', ')}</span></div>
             </div>
+
+            ${sightsHtml}
+
             <div class="detail-block">
-                <div style="font-weight:500; margin-bottom:6px;">📆 Температура по месяцам</div>
+                <div style="font-weight:500; margin-bottom:6px;">📆 Температура воздуха и воды по месяцам</div>
                 ${monthGrid}
             </div>
-            <div style="font-weight:500; margin: 8px 0 4px; color: var(--text-secondary);">💧 Сезон дождей</div>
-            <div class="detail-block" style="margin-top: 0;">
-                <div class="row"><span class="label">Период</span><span class="value ${rainy ? 'rainy' : ''}">${c.rainSeason}</span></div>
-                ${c.rainDetails ? `<div style="font-size:13px;color:var(--text-secondary);padding-top:6px;border-top:1px solid var(--detail-border);margin-top:6px;line-height:1.5;">${c.rainDetails}</div>` : ''}
+
+            <div class="rain-details-block">
+                <div class="row"><span class="label">🌧️ Период дождей</span><span class="value ${rainy ? 'rainy' : ''}">${c.rainSeason}</span></div>
+                ${c.rainDetails ? `<div class="rain-description">${c.rainDetails}</div>` : ''}
             </div>
+
             <div class="recommend">${recommendText}</div>
         `;
         overlay.classList.add('active');
@@ -1643,6 +1897,7 @@
         await fetchExchangeRates();
         render(parseInt(monthSelect.value), false);
         saveToCache(countriesData);
+        updateFilterSummary();
     }
     init();
     setInterval(async () => { await fetchExchangeRates(); }, 3600000);
