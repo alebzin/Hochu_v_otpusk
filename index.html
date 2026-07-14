@@ -752,7 +752,8 @@
             transition: background 0.3s;
             touch-action: pan-y;
             scroll-behavior: smooth;
-            overflow: hidden;
+            overflow-y: auto !important;
+            -webkit-overflow-scrolling: touch;
         }
         @keyframes slideUp {
             0% { opacity: 0; transform: translateY(60px) scale(0.96); }
@@ -804,6 +805,7 @@
             overflow: hidden;
             background: var(--detail-bg);
             flex-shrink: 0;
+            min-height: 150px;
         }
         .detail-hero .hero-image {
             width: 100%;
@@ -1261,6 +1263,18 @@
             0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
             100% { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
+        
+        /* ===== УБИРАЕМ БАРЬЕР ДЛЯ СКРОЛЛА ===== */
+        .detail-content-wrapper {
+            overflow-y: visible;
+        }
+        .detail-card {
+            overflow-y: auto !important;
+            -webkit-overflow-scrolling: touch;
+        }
+        .detail-card .hero-image {
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -1376,7 +1390,7 @@
 </div>
 
 <script>
-    // ===== ДАННЫЕ (51 страна) — сокр. для экономии, но полные =====
+    // ===== ДАННЫЕ (51 страна) =====
     const countriesData = [
         { id: "turkey", name: "Турция", city: "Анталья", flag: "🇹🇷", currency: "TRY", visa: "Не нужна", rainSeason: "Ноя–Мар", rainDetails: "Зимой дожди затяжные, летом — редкие кратковременные грозы.", waterTemps: [17,17,18,20,23,26,28,28,27,24,21,18], seasons: ['low','low','low','medium','medium','high','high','high','medium','medium','low','low'], footnote: "", budget: "medium", flightDuration: "short", flightPrice: "250–400", typeTags: ['family', 'culture', 'beach', 'shopping'], sights: ['🏔️ Памуккале', '🏛️ Калеичи', '🕌 Голубая мечеть', '🏖️ Пляж Клеопатры', '⛰️ Каппадокия'], temps: [10,11,13,18,23,28,31,31,27,22,17,12], humidity: "сухой", language: "Турецкий", plug: "EU", vaccines: "Нет", tips: "10%", carRent: "18+, права МВУ", medicine: "⭐⭐⭐", shopping: "Кожа, ковры, сладости", cuisine: "Кебаб, баклава, раки" },
         { id: "uae", name: "ОАЭ", city: "Дубай", flag: "🇦🇪", currency: "AED", visa: "Не нужна", rainSeason: "Нет", rainDetails: "Дожди крайне редки, в основном зимой.", waterTemps: [20,20,22,24,28,31,33,33,32,29,26,23], seasons: ['high','high','medium','medium','low','low','low','low','low','medium','high','high'], footnote: "", budget: "high", flightDuration: "medium", flightPrice: "350–500", typeTags: ['family', 'party', 'yacht', 'beach', 'shopping'], sights: ['🌆 Бурдж-Халифа', '🕌 Мечеть Шейха Зайда', '🏜️ Сафари в пустыне', '🏝️ Остров Пальма', '🛍️ Дубай-Молл'], temps: [20,21,24,28,33,36,38,38,36,31,26,22], humidity: "сухой", language: "Арабский, английский", plug: "G", vaccines: "Нет", tips: "10-15%", carRent: "21+, МВУ", medicine: "⭐⭐⭐⭐⭐", shopping: "Золото, часы, духи", cuisine: "Шаурма, финики, арабский кофе" },
@@ -1557,19 +1571,15 @@
         return '🥶';
     }
 
-    // ===== Функция для получения фото =====
-    function getPhotoUrl(countryName, cityName) {
-        // Используем несколько источников для надёжности
-        const query = encodeURIComponent(`${cityName} ${countryName} travel landmark`);
-        // Пробуем picsum (стабильный, но без конкретных фото)
-        // И unsplash с разными параметрами
-        const urls = [
+    // ===== Функция для получения фото с несколькими источниками =====
+    function getPhotoUrls(countryName, cityName) {
+        const query = encodeURIComponent(`${cityName} ${countryName} landmark travel`);
+        return [
             `https://source.unsplash.com/800x400/?${query}`,
             `https://source.unsplash.com/featured/?${query}`,
-            `https://picsum.photos/seed/${countryName.toLowerCase()}/800/400`
+            `https://picsum.photos/seed/${countryName.toLowerCase()}-${cityName.toLowerCase()}/800/400`,
+            `https://picsum.photos/800/400?random=${Math.random()}`
         ];
-        // Возвращаем первый — если не загрузится, onerror скроет
-        return urls[0];
     }
 
     // ===== DOM =====
@@ -1914,8 +1924,18 @@
         const rate = getCurrencyRate(c.currency);
         const season = c.seasons[monthIndex];
 
-        // Фото
-        const photoUrl = getPhotoUrl(c.name, c.city);
+        // Фото с несколькими источниками
+        const photoUrls = getPhotoUrls(c.name, c.city);
+        let photoHtml = '';
+        photoUrls.forEach((url, index) => {
+            const loadClass = index === 0 ? 'hero-image' : 'hero-image hidden';
+            const onError = index < photoUrls.length - 1 ? `onerror="this.style.display='none'; document.getElementById('hero-fallback-${index+1}').style.display='block';"` : `onerror="this.style.display='none';"`;
+            const onLoad = `onload="this.classList.add('loaded');"`;
+            photoHtml += `<img class="${loadClass}" id="hero-img-${index}" src="${url}" alt="${c.name}" loading="lazy" ${onError} ${onLoad} />`;
+        });
+
+        // Добавляем fallback с эмодзи
+        photoHtml += `<div class="hero-placeholder" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:80px;opacity:0.2;">${c.flag}</div>`;
 
         let monthGrid = '<div class="detail-temp-grid">';
         monthNames.forEach((m, i) => {
@@ -1982,7 +2002,7 @@
         // Собираем контент с фото-блоком
         detailContent.innerHTML = `
             <div class="detail-hero">
-                <img class="hero-image" src="${photoUrl}" alt="${c.name}" loading="lazy" onerror="this.classList.add('hidden')" onload="this.classList.add('loaded')" />
+                ${photoHtml}
                 <div class="hero-overlay">
                     <span class="hero-flag">${c.flag}</span>
                     <div class="hero-name">${c.name}</div>
