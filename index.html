@@ -1584,7 +1584,10 @@
             }
         }
 
-        if (detailCard) detailCard.scrollTop = 0;
+        // Прокручиваем модалку вверх при открытии
+        if (detailCard) {
+            detailCard.scrollTop = 0;
+        }
         updateDetailButtons();
         if (overlay) {
             overlay.classList.add('active');
@@ -1616,14 +1619,14 @@
             const diff = e.touches[0].clientY - touchStartY;
             const maxScroll = detailCard.scrollHeight - detailCard.clientHeight;
             
-            // Закрытие при свайпе вниз у верхней границы (как было)
+            // Закрытие при свайпе вниз у верхней границы
             if (currentScrollTop <= 0 && diff > 50) {
                 closeDetail();
                 isDragging = false;
                 return;
             }
             
-            // Закрытие при свайпе вверх у нижней границы (добавлено)
+            // Закрытие при свайпе вверх у нижней границы
             if (currentScrollTop >= maxScroll - 2 && diff < -50) {
                 closeDetail();
                 isDragging = false;
