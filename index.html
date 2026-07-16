@@ -432,6 +432,7 @@
             position: relative;
             transition: background 0.3s;
             -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
         }
         @keyframes slideUp {
             0% { opacity: 0; transform: translateY(40px); }
@@ -1584,10 +1585,20 @@
             }
         }
 
-        // Прокручиваем модалку вверх при открытии
+        // ПРИНУДИТЕЛЬНАЯ ПРОКРУТКА ВВЕРХ - сброс скролла при открытии
         if (detailCard) {
+            // Сначала сбрасываем через scrollTop
             detailCard.scrollTop = 0;
+            // Дополнительно через requestAnimationFrame для гарантии
+            requestAnimationFrame(() => {
+                if (detailCard) detailCard.scrollTop = 0;
+            });
+            // И ещё один раз с небольшой задержкой
+            setTimeout(() => {
+                if (detailCard) detailCard.scrollTop = 0;
+            }, 50);
         }
+        
         updateDetailButtons();
         if (overlay) {
             overlay.classList.add('active');
@@ -1601,26 +1612,27 @@
         currentDetailId = null;
     }
 
-    // ===== СВАЙП ДЛЯ ЗАКРЫТИЯ МОДАЛКИ (ВВЕРХ И ВНИЗ) =====
+    // ===== СВАЙП ДЛЯ ЗАКРЫТИЯ МОДАЛКИ =====
     let touchStartY = 0;
     let isDragging = false;
-    let startScrollTop = 0;
 
     if (detailCard) {
         detailCard.addEventListener('touchstart', (e) => {
             touchStartY = e.touches[0].clientY;
-            startScrollTop = detailCard.scrollTop;
             isDragging = true;
         }, { passive: true });
         
         detailCard.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
+            if (!isDragging || !overlay.classList.contains('active')) return;
+            
             const currentScrollTop = detailCard.scrollTop;
             const diff = e.touches[0].clientY - touchStartY;
             const maxScroll = detailCard.scrollHeight - detailCard.clientHeight;
             
             // Закрытие при свайпе вниз у верхней границы
             if (currentScrollTop <= 0 && diff > 50) {
+                // Предотвращаем передачу жеста на страницу
+                e.preventDefault();
                 closeDetail();
                 isDragging = false;
                 return;
@@ -1628,11 +1640,13 @@
             
             // Закрытие при свайпе вверх у нижней границы
             if (currentScrollTop >= maxScroll - 2 && diff < -50) {
+                // Предотвращаем передачу жеста на страницу
+                e.preventDefault();
                 closeDetail();
                 isDragging = false;
                 return;
             }
-        }, { passive: true });
+        }, { passive: false });
         
         detailCard.addEventListener('touchend', () => {
             isDragging = false;
