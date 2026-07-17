@@ -11,13 +11,18 @@
             --text: #1a2a3f;
             --text-secondary: #526b84;
             --border: #e8eff8;
-            --shadow: 0 2px 8px rgba(0, 20, 40, 0.06);
+            --shadow: 0 4px 12px rgba(0, 20, 40, 0.08);
+            --shadow-hover: 0 8px 24px rgba(0, 20, 40, 0.12);
             --tag-bg: #eef4fb;
             --accent: #004580;
+            --accent-light: rgba(0, 69, 128, 0.1);
             --overlay: rgba(5, 20, 40, 0.5);
             --success: #27ae60;
             --warning: #f39c12;
             --danger: #e74c3c;
+            --radius-card: 16px;
+            --radius-lg: 24px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
         [data-theme="dark"] {
             --bg: #0d1a2b;
@@ -25,15 +30,18 @@
             --text: #e8edf3;
             --text-secondary: #9ab0c7;
             --border: #2a4058;
-            --shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.4);
             --tag-bg: #243a52;
             --accent: #6aafe0;
+            --accent-light: rgba(106, 175, 224, 0.15);
             --overlay: rgba(0, 0, 0, 0.7);
             --success: #2ecc71;
             --warning: #f1c40f;
             --danger: #e74c3c;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background: var(--bg);
@@ -91,8 +99,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.2s;
+            transition: var(--transition);
             color: var(--text);
+            box-shadow: var(--shadow);
         }
         .theme-toggle:active { transform: scale(0.92); }
         .month-selector {
@@ -105,6 +114,7 @@
             border: 1px solid var(--border);
             margin-bottom: 12px;
             transition: background 0.3s, border-color 0.3s;
+            box-shadow: var(--shadow);
         }
         .month-selector label {
             font-weight: 500;
@@ -147,12 +157,12 @@
             color: var(--text);
             font-family: inherit;
             outline: none;
-            transition: 0.2s;
+            transition: var(--transition);
             box-shadow: var(--shadow);
         }
         .search-container input:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(0, 69, 128, 0.1);
+            box-shadow: 0 0 0 3px var(--accent-light);
         }
         .search-container input::placeholder {
             color: var(--text-secondary);
@@ -175,7 +185,7 @@
             font-size: 13px;
             font-weight: 500;
             color: var(--text-secondary);
-            transition: 0.2s;
+            transition: var(--transition);
             user-select: none;
             width: 100%;
             justify-content: space-between;
@@ -184,7 +194,7 @@
         .filters-toggle:active { transform: scale(0.98); }
         .filters-toggle .toggle-icon {
             font-size: 16px;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform var(--transition);
         }
         .filters-toggle .toggle-icon.open { transform: rotate(180deg); }
         .filters-toggle .filter-count {
@@ -255,35 +265,46 @@
             font-size: 11px;
             color: var(--text);
             background: var(--tag-bg);
-            padding: 2px 8px;
+            padding: 4px 10px;
             border-radius: 20px;
-            border: 1px solid var(--border);
-            transition: all 0.2s;
+            border: 1.5px solid transparent;
+            transition: all var(--transition);
             user-select: none;
         }
         .filters .filter-options label:active { transform: scale(0.95); }
         .filters .filter-options label.active {
-            background: var(--accent);
-            color: white;
+            background: var(--accent-light);
+            color: var(--accent);
             border-color: var(--accent);
+            font-weight: 600;
         }
         .filters .filter-options label .checkmark {
             font-size: 9px;
-            opacity: 0.3;
-            transition: opacity 0.2s;
+            opacity: 0;
+            transition: opacity var(--transition);
         }
         .filters .filter-options label.active .checkmark { opacity: 1; }
+        .filters .filter-options label .filter-icon {
+            font-size: 12px;
+            margin-right: 2px;
+        }
         .filters .filter-reset {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--text-secondary);
             cursor: pointer;
-            padding: 2px 10px;
+            padding: 4px 12px;
             border-radius: 20px;
             border: 1px solid var(--border);
             background: var(--tag-bg);
-            transition: 0.2s;
+            transition: var(--transition);
             font-weight: 500;
             margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .filters .filter-reset:hover {
+            background: var(--border);
         }
         .filters .filter-reset:active { transform: scale(0.95); }
         @media (max-width: 420px) {
@@ -293,16 +314,16 @@
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
             margin-top: 4px;
         }
         .country-card {
             background: var(--bg-card);
-            border-radius: 16px;
+            border-radius: var(--radius-card);
             padding: 12px 10px 10px;
             box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-            transition: all 0.2s, background 0.3s, border-color 0.3s;
+            border: 2px solid transparent;
+            transition: all var(--transition);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -313,6 +334,17 @@
             animation: cardAppear 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
             opacity: 0;
             transform: translateY(10px);
+        }
+        .country-card:hover:not(:active) {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        .country-card:active {
+            transform: scale(0.97);
+        }
+        .country-card.selected {
+            border-color: var(--accent);
+            background: var(--accent-light);
         }
         .country-card:nth-child(1) { animation-delay: 0.01s; }
         .country-card:nth-child(2) { animation-delay: 0.02s; }
@@ -368,13 +400,9 @@
             0% { opacity: 0; transform: translateY(10px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-        .country-card:active {
-            transform: scale(0.96);
-            background: var(--tag-bg);
-        }
         .card-color {
             width: 100%;
-            height: 6px;
+            height: 5px;
             border-radius: 4px;
             margin-bottom: 8px;
             flex-shrink: 0;
@@ -409,6 +437,7 @@
         .card-weather .water {
             font-size: 11px;
             color: var(--text-secondary);
+            font-weight: 500;
         }
         .card-weather .rain-badge {
             font-size: 9px;
@@ -441,23 +470,28 @@
             position: absolute;
             top: 6px;
             right: 6px;
-            width: 22px;
-            height: 22px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             border: 2px solid var(--border);
             background: var(--bg-card);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 11px;
+            font-size: 13px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all var(--transition);
             color: var(--text-secondary);
+            box-shadow: var(--shadow);
         }
         .compare-checkbox.active {
             background: var(--accent);
             border-color: var(--accent);
             color: white;
+            box-shadow: 0 2px 8px rgba(0, 69, 128, 0.3);
+        }
+        .compare-checkbox:hover {
+            transform: scale(1.05);
         }
 
         .detail-overlay {
@@ -483,7 +517,7 @@
             background: var(--bg-card);
             width: 100%;
             max-width: 500px;
-            border-radius: 24px 24px 20px 20px;
+            border-radius: var(--radius-lg) var(--radius-lg) 20px 20px;
             max-height: 85vh;
             overflow-y: auto;
             animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -503,12 +537,17 @@
             height: 150px;
             overflow: hidden;
             background: var(--tag-bg);
-            border-radius: 24px 24px 0 0;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
             flex-shrink: 0;
         }
-        .detail-hero .hero-color {
+        .detail-hero .hero-gradient {
             width: 100%;
             height: 100%;
+            background: linear-gradient(to bottom, 
+                var(--hero-color) 0%, 
+                var(--hero-color) 60%, 
+                var(--hero-color-dark) 100%
+            );
         }
         .detail-hero .hero-overlay {
             position: absolute;
@@ -516,7 +555,7 @@
             left: 0;
             right: 0;
             padding: 14px 18px 12px;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.5) 70%);
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.6) 70%);
             color: white;
         }
         .detail-hero .hero-overlay .hero-flag {
@@ -525,14 +564,14 @@
             margin-bottom: 2px;
         }
         .detail-hero .hero-overlay .hero-name {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 700;
             color: white;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
         .detail-hero .hero-overlay .hero-sub {
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -550,11 +589,11 @@
             position: absolute;
             top: 12px;
             right: 12px;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(4px);
             border: none;
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             font-size: 18px;
             line-height: 1;
@@ -563,10 +602,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.2s;
+            transition: var(--transition);
             z-index: 10;
         }
-        .detail-close:hover { background: rgba(0, 0, 0, 0.6); }
+        .detail-close:hover { background: rgba(0, 0, 0, 0.7); transform: scale(1.05); }
         .detail-close:active { transform: scale(0.92); }
 
         .detail-content-wrapper { padding: 6px 18px 18px; }
@@ -581,7 +620,7 @@
         .detail-block .row {
             display: flex;
             justify-content: space-between;
-            padding: 3px 0;
+            padding: 4px 0;
             border-bottom: 1px solid var(--border);
             font-size: 13px;
         }
@@ -603,20 +642,20 @@
         }
         .detail-section-header {
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             color: var(--text);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
         .detail-info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
         .detail-info-grid .info-item {
             display: flex;
             justify-content: space-between;
-            padding: 3px 0;
-            font-size: 12px;
+            padding: 4px 0;
+            font-size: 13px;
             border-bottom: 1px solid var(--border);
             gap: 6px;
         }
@@ -629,6 +668,10 @@
             font-weight: 500;
             color: var(--text);
             text-align: right;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 4px;
         }
         
         .budget-calculator {
@@ -637,11 +680,27 @@
             padding: 12px 14px;
             margin: 8px 0;
             border: 2px solid var(--accent);
+            box-shadow: var(--shadow);
+        }
+        .budget-calculator .budget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .budget-calculator .budget-title {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text);
+        }
+        .budget-calculator .budget-people {
+            font-size: 12px;
+            color: var(--text-secondary);
         }
         .budget-calculator .budget-row {
             display: flex;
             justify-content: space-between;
-            padding: 4px 0;
+            padding: 5px 0;
             font-size: 13px;
             border-bottom: 1px solid var(--border);
         }
@@ -649,10 +708,13 @@
         .budget-calculator .budget-total {
             font-weight: 700;
             color: var(--accent);
-            font-size: 16px;
+            font-size: 17px;
         }
         .budget-calculator .budget-label {
             color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         .budget-calculator .budget-value {
             font-weight: 600;
@@ -665,21 +727,56 @@
             padding-top: 6px;
             border-top: 1px solid var(--border);
         }
+        .budget-calculator .trip-partner {
+            margin-top: 10px;
+            padding: 10px 12px;
+            background: linear-gradient(135deg, #f8f4ff 0%, #f0ecff 100%);
+            border-radius: 12px;
+            border: 1px solid #d4c8f0;
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        [data-theme="dark"] .budget-calculator .trip-partner {
+            background: linear-gradient(135deg, #1a1a3a 0%, #2a1a4a 100%);
+            border-color: #4a3a6a;
+        }
+        .budget-calculator .trip-partner .trip-link {
+            display: inline-block;
+            margin-top: 6px;
+            padding: 6px 16px;
+            background: var(--accent);
+            color: white;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all var(--transition);
+        }
+        .budget-calculator .trip-partner .trip-link:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 69, 128, 0.3);
+        }
+        .budget-calculator .trip-partner .trip-link:active {
+            transform: scale(0.97);
+        }
+
         .budget-days-selector {
             display: flex;
             gap: 6px;
             flex-wrap: wrap;
-            margin: 6px 0;
+            margin: 6px 0 8px;
         }
         .budget-days-selector button {
             padding: 4px 12px;
             border-radius: 16px;
-            border: 1px solid var(--border);
+            border: 1.5px solid var(--border);
             background: var(--tag-bg);
             color: var(--text);
             font-size: 12px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all var(--transition);
+            font-weight: 500;
         }
         .budget-days-selector button.active {
             background: var(--accent);
@@ -687,6 +784,9 @@
             border-color: var(--accent);
         }
         .budget-days-selector button:active { transform: scale(0.95); }
+        .budget-days-selector button:hover:not(.active) {
+            border-color: var(--accent);
+        }
 
         .detail-temp-grid {
             display: grid;
@@ -762,7 +862,7 @@
         }
         .sights-festivals-tips-block .section-title {
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             color: var(--text);
             margin: 8px 0 4px;
         }
@@ -773,20 +873,20 @@
             gap: 4px 6px;
         }
         .sights-festivals-tips-block .sight-item {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--text);
             background: var(--bg-card);
-            padding: 2px 8px;
+            padding: 3px 10px;
             border-radius: 12px;
             border: 1px solid var(--border);
         }
         .sights-festivals-tips-block .festival-badge {
             display: inline-block;
-            padding: 2px 8px;
+            padding: 3px 10px;
             border-radius: 12px;
             background: #e8d5f5;
             color: #6c3483;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 600;
             margin: 2px;
         }
@@ -795,10 +895,14 @@
             color: #d8a0f0;
         }
         .sights-festivals-tips-block .tip-text {
-            font-size: 12px;
+            font-size: 13px;
             color: var(--text-secondary);
             line-height: 1.5;
             margin-top: 4px;
+            padding: 8px 12px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            border: 1px solid var(--border);
         }
 
         .checklist-block {
@@ -812,8 +916,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            padding: 4px 0;
-            font-size: 12px;
+            padding: 5px 0;
+            font-size: 13px;
             border-bottom: 1px solid var(--border);
         }
         .checklist-block .checklist-item:last-child { border-bottom: none; }
@@ -824,15 +928,19 @@
         }
         .checklist-block .checklist-item .check-text {
             color: var(--text);
+            font-weight: 500;
         }
         .checklist-block .checklist-item .check-detail {
             color: var(--text-secondary);
-            font-size: 11px;
+            font-size: 12px;
             margin-left: auto;
+            background: var(--tag-bg);
+            padding: 1px 8px;
+            border-radius: 10px;
         }
         .checklist-block .checklist-title {
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             color: var(--text);
             margin-bottom: 6px;
         }
@@ -848,12 +956,12 @@
             background: var(--tag-bg);
             border: 1px solid var(--border);
             border-radius: 20px;
-            padding: 5px 12px;
-            font-size: 12px;
+            padding: 6px 14px;
+            font-size: 13px;
             font-weight: 500;
             color: var(--text);
             cursor: pointer;
-            transition: 0.2s;
+            transition: all var(--transition);
         }
         .detail-actions button:active { transform: scale(0.95); }
         .detail-actions .add-compare-btn {
@@ -909,7 +1017,7 @@
             color: #8fdfb0;
         }
         .type-badge {
-            font-size: 9px;
+            font-size: 10px;
             font-weight: 500;
             padding: 2px 8px;
             border-radius: 12px;
@@ -932,7 +1040,7 @@
         .flight-info-compact {
             display: flex;
             justify-content: space-between;
-            padding: 3px 0;
+            padding: 4px 0;
             border-bottom: 1px solid var(--border);
             font-size: 13px;
         }
@@ -947,21 +1055,22 @@
 
         .plug-tag {
             display: inline-block;
-            padding: 2px 8px;
+            padding: 2px 10px;
             border-radius: 12px;
-            border: 1px solid var(--border);
+            border: 1.5px solid var(--border);
             background: var(--bg-card);
             font-weight: 500;
             font-size: 12px;
             color: var(--accent);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all var(--transition);
             margin: 1px 2px;
             user-select: none;
         }
         .plug-tag:hover {
             border-color: var(--accent);
-            background: var(--tag-bg);
+            background: var(--accent-light);
+            transform: scale(1.02);
         }
         .plug-tag:active { transform: scale(0.95); }
         .plug-tag .plug-icon { margin-right: 2px; }
@@ -978,52 +1087,66 @@
             justify-content: space-between;
             align-items: center;
             z-index: 500;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
-            transition: background 0.3s, border-color 0.3s, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             transform: translateY(100%);
+            opacity: 0;
         }
         .compare-bar.active {
             display: flex;
             transform: translateY(0);
+            opacity: 1;
         }
         .compare-bar .compare-info {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             font-size: 13px;
             color: var(--text);
+            flex: 1;
+            min-width: 0;
         }
         .compare-bar .compare-info .count {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--accent);
+            font-size: 15px;
         }
-        .compare-bar .compare-info .selected-names {
-            font-size: 11px;
-            color: var(--text-secondary);
+        .compare-bar .compare-info .selected-chips {
             display: flex;
             gap: 4px;
             align-items: center;
+            flex-wrap: wrap;
+            overflow: hidden;
         }
-        .compare-bar .compare-info .selected-names span {
+        .compare-bar .compare-info .selected-chips .chip {
             background: var(--tag-bg);
-            padding: 1px 6px;
+            padding: 2px 8px 2px 6px;
             border-radius: 12px;
             border: 1px solid var(--border);
             font-weight: 500;
+            font-size: 11px;
             color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            white-space: nowrap;
+        }
+        .compare-bar .compare-info .selected-chips .chip .chip-flag {
+            font-size: 14px;
         }
         .compare-bar .compare-actions {
             display: flex;
             gap: 6px;
+            flex-shrink: 0;
         }
         .compare-bar .compare-actions button {
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 20px;
             border: none;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 500;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all var(--transition);
         }
         .compare-bar .compare-actions .compare-btn {
             background: var(--accent);
@@ -1059,7 +1182,7 @@
             background: var(--bg-card);
             width: 100%;
             max-width: 700px;
-            border-radius: 24px;
+            border-radius: var(--radius-lg);
             padding: 20px 18px 24px;
             max-height: 90vh;
             overflow-y: auto;
@@ -1080,8 +1203,8 @@
         .compare-modal .modal-close {
             background: var(--tag-bg);
             border: none;
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             font-size: 16px;
             cursor: pointer;
@@ -1089,7 +1212,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.15s;
+            transition: var(--transition);
         }
         .compare-modal .modal-close:active { transform: scale(0.92); }
         .compare-grid {
@@ -1117,7 +1240,7 @@
         .compare-item .ci-row {
             display: flex;
             justify-content: space-between;
-            padding: 2px 0;
+            padding: 3px 0;
             font-size: 12px;
             border-bottom: 1px solid var(--border);
         }
@@ -1152,7 +1275,7 @@
         }
         @media (max-width: 480px) {
             .compare-grid { grid-template-columns: 1fr; }
-            .compare-bar .compare-info .selected-names { display: none; }
+            .compare-bar .compare-info .selected-chips { display: none; }
             .detail-info-grid { grid-template-columns: 1fr; }
             .detail-temp-grid {
                 grid-template-columns: repeat(6, 1fr);
@@ -1162,16 +1285,16 @@
         }
         .compare-hint {
             position: fixed;
-            bottom: 72px;
+            bottom: 76px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 8px 16px;
-            font-size: 13px;
+            padding: 10px 20px;
+            font-size: 14px;
             color: var(--text-secondary);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            box-shadow: var(--shadow-hover);
             display: none;
             z-index: 450;
             animation: floatUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1203,7 +1326,7 @@
         }
         @media (max-width: 420px) {
             .header h1 { font-size: 22px; }
-            .grid { gap: 8px; }
+            .grid { gap: 10px; }
             .country-card { padding: 10px 8px 8px; border-radius: 14px; }
             .flag { font-size: 24px; }
             .country-name { font-size: 12px; }
@@ -1219,20 +1342,20 @@
             }
             .compare-bar .compare-info { font-size: 12px; }
             .compare-bar .compare-actions button {
-                font-size: 11px;
+                font-size: 12px;
                 padding: 4px 10px;
             }
-            body { padding-bottom: 76px; }
+            body { padding-bottom: 80px; }
             .filters-toggle .filter-summary { display: none; }
             .detail-actions button {
-                font-size: 11px;
-                padding: 4px 10px;
+                font-size: 12px;
+                padding: 5px 12px;
             }
-            .detail-hero .hero-overlay .hero-name { font-size: 17px; }
+            .detail-hero .hero-overlay .hero-name { font-size: 18px; }
             .detail-hero .hero-overlay .hero-sub { font-size: 11px; }
         }
         @media (min-width: 600px) {
-            .grid { gap: 12px; }
+            .grid { gap: 14px; }
         }
 
         .visa-difficulty {
@@ -1312,7 +1435,7 @@
             background: var(--bg-card);
             width: 100%;
             max-width: 400px;
-            border-radius: 24px;
+            border-radius: var(--radius-lg);
             padding: 24px 20px 20px;
             animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             transition: background 0.3s;
@@ -1340,7 +1463,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.15s;
+            transition: var(--transition);
         }
         .plug-modal .plug-modal-close:active { transform: scale(0.92); }
         .plug-modal .plug-type-display {
@@ -1475,8 +1598,8 @@
 
     <div class="compare-bar" id="compareBar">
         <div class="compare-info">
-            <span>📋 Сравнение: <span class="count" id="compareCount">0</span> / 2</span>
-            <div class="selected-names" id="selectedNames"></div>
+            <span>📋 <span class="count" id="compareCount">0</span></span>
+            <div class="selected-chips" id="selectedChips"></div>
         </div>
         <div class="compare-actions">
             <button class="clear-btn" id="clearCompare">✕</button>
@@ -3124,7 +3247,6 @@
                 if (countryExtrasFull[countryName]) {
                     return countryExtrasFull[countryName];
                 }
-                // Дефолтные значения для стран без расширенных данных
                 return {
                     comfort: { jan: 'good', feb: 'good', mar: 'good', apr: 'good', may: 'good', jun: 'good', jul: 'good',
                         aug: 'good', sep: 'good', oct: 'good', nov: 'good', dec: 'good' },
@@ -3141,63 +3263,97 @@
                 };
             }
 
-            // ===== КУРСЫ ВАЛЮТ =====
+            // ===== КУРСЫ ВАЛЮТ (АКТУАЛЬНЫЕ) =====
             let usdToRub = 88;
             let currencyRates = {};
 
-            const currencyApis = [
-                {
-                    url: 'https://api.exchangerate-api.com/v4/latest/USD',
-                    parse: (data) => { return { rub: data.rates.RUB, rates: data.rates }; }
-                },
-                {
-                    url: 'https://api.exchangeratesapi.io/latest?base=USD',
-                    parse: (data) => { return { rub: data.rates.RUB, rates: data.rates }; }
-                },
-                {
-                    url: 'https://api.frankfurter.app/latest?from=USD',
-                    parse: (data) => { return { rub: data.rates.RUB, rates: data.rates }; }
-                },
-                {
-                    url: 'https://api.coingecko.com/api/v3/exchange_rates',
-                    parse: (data) => {
-                        const rub = data.rates.rub ? data.rates.rub.value : null;
-                        const rates = {};
-                        if (data.rates) {
-                            Object.keys(data.rates).forEach(key => {
-                                rates[key.toUpperCase()] = data.rates[key].value;
-                            });
-                        }
-                        return { rub, rates };
-                    }
-                }
-            ];
+            // Базовые курсы валют к USD
+            const baseRates = {
+                'USD': 1.0,
+                'RUB': 88.0,
+                'EUR': 0.92,
+                'GBP': 0.79,
+                'CHF': 0.91,
+                'CAD': 1.36,
+                'AUD': 1.52,
+                'NZD': 1.65,
+                'JPY': 149.5,
+                'CNY': 7.24,
+                'KRW': 1320,
+                'INR': 83.2,
+                'THB': 35.8,
+                'VND': 24800,
+                'MYR': 4.72,
+                'SGD': 1.35,
+                'IDR': 15600,
+                'PHP': 56.2,
+                'KHR': 4060,
+                'LKR': 312,
+                'TRY': 32.1,
+                'EGP': 47.8,
+                'AED': 3.67,
+                'SAR': 3.75,
+                'QAR': 3.64,
+                'OMR': 0.385,
+                'JOD': 0.709,
+                'MAD': 10.1,
+                'TND': 3.12,
+                'MXN': 16.8,
+                'CUP': 24.0,
+                'DOP': 58.5,
+                'MVR': 15.4,
+                'SCR': 14.2,
+                'MUR': 46.0,
+                'BGN': 1.81,
+                'CZK': 23.2,
+                'RSD': 108,
+                'KZT': 449,
+                'UZS': 12400,
+                'GEL': 2.68
+            };
 
-            let cachedRates = {};
+            let cachedRates = { ...baseRates };
             let lastUpdateTime = 0;
 
+            // ===== ПРАВИЛЬНАЯ ФУНКЦИЯ ПОЛУЧЕНИЯ КУРСА =====
             function getCurrencyRate(currencyCode) {
-                if (currencyRates[currencyCode]) return currencyRates[currencyCode];
-                if (cachedRates[currencyCode]) return cachedRates[currencyCode];
-                const defaultRates = {
-                    'RUB': 1, 'USD': 1, 'EUR': 0.92, 'GBP': 0.79, 'CHF': 0.91,
-                    'CAD': 1.36, 'AUD': 1.52, 'NZD': 1.65, 'JPY': 149.5, 'CNY': 7.24,
-                    'KRW': 1320, 'INR': 83.2, 'THB': 35.8, 'VND': 24800, 'MYR': 4.72,
-                    'SGD': 1.35, 'IDR': 15600, 'PHP': 56.2, 'KHR': 4060, 'LKR': 312,
-                    'TRY': 32.1, 'EGP': 47.8, 'AED': 3.67, 'SAR': 3.75, 'QAR': 3.64,
-                    'OMR': 0.385, 'JOD': 0.709, 'MAD': 10.1, 'TND': 3.12, 'MXN': 16.8,
-                    'CUP': 24.0, 'DOP': 58.5, 'MVR': 15.4, 'SCR': 14.2, 'MUR': 46.0,
-                    'BGN': 1.81, 'CZK': 23.2, 'RSD': 108, 'KZT': 449, 'UZS': 12400,
-                    'GEL': 2.68
-                };
-                return defaultRates[currencyCode] || 1;
+                // Получаем курс валюты к USD
+                let rateToUSD = currencyRates[currencyCode] || cachedRates[currencyCode] || baseRates[currencyCode];
+                
+                if (!rateToUSD) {
+                    return 1;
+                }
+                
+                // Конвертируем в рубли: (1 / курс_к_USD) * курс_USD_к_RUB
+                const rubRate = (1 / rateToUSD) * usdToRub;
+                
+                // Округляем до 2 знаков
+                return Math.round(rubRate * 100) / 100;
             }
 
+            // ===== ФУНКЦИЯ ОБНОВЛЕНИЯ КУРСОВ =====
             async function fetchCurrencyRates() {
                 const now = Date.now();
-                if (now - lastUpdateTime < 300000 && Object.keys(currencyRates).length > 0) return;
+                if (now - lastUpdateTime < 300000 && Object.keys(currencyRates).length > 0) {
+                    return;
+                }
 
-                for (const api of currencyApis) {
+                const apis = [
+                    {
+                        url: 'https://api.exchangerate-api.com/v4/latest/USD',
+                        parse: (data) => ({ rub: data.rates.RUB, rates: data.rates })
+                    },
+                    {
+                        url: 'https://api.exchangeratesapi.io/latest?base=USD',
+                        parse: (data) => ({ rub: data.rates.RUB, rates: data.rates })
+                    },
+                    {
+                        url: 'https://api.frankfurter.app/latest?from=USD',
+                        parse: (data) => ({ rub: data.rates.RUB, rates: data.rates })
+                    }
+                ];
+
+                for (const api of apis) {
                     try {
                         const response = await fetch(api.url);
                         if (!response.ok) continue;
@@ -3206,17 +3362,15 @@
 
                         if (parsed.rub && parsed.rub > 0) {
                             usdToRub = parsed.rub;
-                            currencyRates = parsed.rates || {};
+                            currencyRates = { ...parsed.rates };
+                            currencyRates['RUB'] = parsed.rub;
                             cachedRates = { ...currencyRates };
-                            currencyRates['RUB'] = 1;
-                            cachedRates['RUB'] = 1;
                             lastUpdateTime = now;
-                            console.log(`✅ Курсы обновлены через ${api.url}, USD/RUB = ${usdToRub}`);
+                            console.log(`✅ Курсы обновлены, USD/RUB = ${usdToRub}`);
                             return;
                         }
                     } catch (e) {
-                        console.warn(`⚠️ Ошибка при запросе к ${api.url}:`, e.message);
-                        continue;
+                        console.warn(`⚠️ Ошибка при запросе курсов:`, e.message);
                     }
                 }
 
@@ -3225,10 +3379,9 @@
                     usdToRub = cachedRates['RUB'] || 88;
                     console.log(`📦 Использованы кэшированные курсы, USD/RUB = ${usdToRub}`);
                 } else {
-                    usdToRub = 88;
-                    currencyRates = { 'RUB': 1 };
-                    cachedRates = { 'RUB': 1 };
-                    console.log(`📦 Использованы дефолтные курсы, USD/RUB = ${usdToRub}`);
+                    currencyRates = { ...baseRates };
+                    usdToRub = baseRates['RUB'] || 88;
+                    console.log(`📦 Использованы базовые курсы, USD/RUB = ${usdToRub}`);
                 }
             }
 
@@ -3274,7 +3427,6 @@
                 const extras = getCountryExtras(c.name);
                 const usdRate = usdToRub || 88;
                 
-                // Базовые расходы
                 let meal, transfer;
                 if (extras && extras.budget) {
                     meal = Math.round(extras.budget.meal / 88 * usdRate);
@@ -3284,7 +3436,6 @@
                     transfer = Math.round(2000 / 88 * usdRate);
                 }
                 
-                // Перелёт (среднее значение из flightPrice)
                 let flightPrice = 0;
                 if (c.flightPrice) {
                     const parts = c.flightPrice.split('–');
@@ -3296,17 +3447,12 @@
                         flightPrice = parseInt(c.flightPrice.trim()) || 0;
                     }
                 }
-                // Перелёт на 2 человек в обе стороны
-                const flightTotal = flightPrice * 2 * 2 * usdRate; // 2 человека * 2 стороны * курс
+                const flightTotal = flightPrice * 2 * 2 * usdRate;
                 
-                // Проживание (отель) за одну ночь на 2 человек
                 const hotelPriceUsd = c.hotelPrice || 100;
                 const hotelPerNight = Math.round(hotelPriceUsd * usdRate);
-                
-                // Питание на 2 человек в день
                 const mealForTwo = meal * 4;
                 
-                // Итого: перелёт + трансфер*2 (туда и обратно) + отель*кол-во дней + питание*кол-во дней
                 const total = flightTotal + (transfer * 2) + (hotelPerNight * days) + (mealForTwo * days);
                 
                 return { 
@@ -3404,7 +3550,6 @@
                 'Сербия': '🇷🇸 Попробуйте плескавицу — мясную лепёшку, и ракию — фруктовый бренди.'
             };
 
-            // Для стран без совета — базовый
             countriesData.forEach(c => {
                 if (!countryTips[c.name]) {
                     countryTips[c.name] =
@@ -3447,7 +3592,7 @@
             const compareFromDetailBtn = document.getElementById('compareFromDetailBtn');
             const compareBar = document.getElementById('compareBar');
             const compareCount = document.getElementById('compareCount');
-            const selectedNames = document.getElementById('selectedNames');
+            const selectedChips = document.getElementById('selectedChips');
             const compareBtn = document.getElementById('compareBtn');
             const clearCompareBtn = document.getElementById('clearCompare');
             const compareOverlay = document.getElementById('compareOverlay');
@@ -3650,7 +3795,7 @@
                 const comfortEmoji = getComfortEmoji(comfort);
 
                 const card = document.createElement('div');
-                card.className = 'country-card';
+                card.className = 'country-card' + (isSelected ? ' selected' : '');
                 card.setAttribute('data-id', c.id);
 
                 const colorBar = document.createElement('div');
@@ -3688,7 +3833,7 @@
 
                 const compareEl = document.createElement('div');
                 compareEl.className = 'compare-checkbox' + (isSelected ? ' active' : '');
-                compareEl.textContent = isSelected ? '✓' : '☐';
+                compareEl.textContent = isSelected ? '✓' : '+';
                 compareEl.addEventListener('click', (e) => {
                     e.stopPropagation();
                     toggleCompare(c.id);
@@ -3714,18 +3859,19 @@
                 if (compareCount) compareCount.textContent = compareList.length;
                 if (compareBtn) compareBtn.disabled = compareList.length < 2;
 
-                if (compareList.length > 0) {
-                    const names = compareList.map(id => { const c = countriesData.find(d => d.id === id); return c ?
-                            `${c.flag} ${c.name}` : ''; }).filter(Boolean);
-                    if (selectedNames) selectedNames.innerHTML = names.map(n => `<span>${n}</span>`).join('');
-                } else if (selectedNames) {
-                    selectedNames.innerHTML = '';
+                if (compareList.length > 0 && selectedChips) {
+                    const chips = compareList.map(id => {
+                        const c = countriesData.find(d => d.id === id);
+                        return c ? `<span class="chip"><span class="chip-flag">${c.flag}</span> ${c.name}</span>` : '';
+                    }).filter(Boolean);
+                    selectedChips.innerHTML = chips.join('');
+                } else if (selectedChips) {
+                    selectedChips.innerHTML = '';
                 }
 
                 if (compareHint) compareHint.classList.toggle('active', compareList.length === 1);
                 if (compareBar) {
-                    if (compareList.length > 0) compareBar.classList.add('active');
-                    else compareBar.classList.remove('active');
+                    compareBar.classList.toggle('active', compareList.length > 0);
                 }
                 updateDetailButtons();
             }
@@ -3738,8 +3884,7 @@
                     addCompareBtn.classList.toggle('added', isSelected);
                 }
                 if (compareFromDetailBtn) {
-                    if (compareList.length === 2) compareFromDetailBtn.classList.add('visible');
-                    else compareFromDetailBtn.classList.remove('visible');
+                    compareFromDetailBtn.classList.toggle('visible', compareList.length === 2);
                 }
             }
 
@@ -3806,7 +3951,6 @@
 
                 const rainDisplay = c.rainSeason === '–' || c.rainSeason === 'Нет' ? 'Нет' : c.rainSeason;
 
-                // Блок "О стране" - убраны Город, Аренда авто, Бюджет и Медицина
                 const infoItems = [
                     { label: 'Язык', value: c.language || '—' },
                     { label: 'Прививки', value: c.vaccines || '—' },
@@ -3832,7 +3976,6 @@
                 });
                 infoHtml += `</div>`;
 
-                // Блок с достопримечательностями, фестивалями и советами
                 let sightsFestivalsTipsHtml = `
                     <div class="sights-festivals-tips-block">
                         ${c.sights && c.sights.length > 0 ? `
@@ -3854,7 +3997,6 @@
                     </div>
                 `;
 
-                // Чек-лист
                 let checklistHtml = `
                     <div class="checklist-block">
                         <div class="checklist-title">✅ Чек-лист перед поездкой</div>
@@ -3868,7 +4010,6 @@
                     </div>
                 `;
 
-                // Виза
                 const visaBlockHtml = `
                     <div class="detail-block">
                         <div class="detail-section-header">
@@ -3893,12 +4034,14 @@
                     `😰 В ${monthGen} не самый комфортный сезон для этой страны.`;
                 if (rainy) recommendText += ` Учтите, что в ${monthGen} сезон дождей.`;
 
-                // Сезон с месяцем
                 const seasonLabel = `Сезон в ${monthGen}`;
+
+                const heroColor = c.color;
+                const heroColorDark = c.color + '99';
 
                 const detailHTML = `
                     <div class="detail-hero">
-                        <div class="hero-color" style="background:${c.color}"></div>
+                        <div class="hero-gradient" style="--hero-color: ${heroColor}; --hero-color-dark: ${heroColorDark};"></div>
                         <div class="hero-overlay">
                             <span class="hero-flag">${c.flag}</span>
                             <div class="hero-name">${c.name}</div>
@@ -3926,11 +4069,9 @@
                         ${visaBlockHtml}
 
                         <div class="budget-calculator">
-                            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-                                <span style="font-weight:600;font-size:14px;">💰 Бюджет на поездку</span>
-                                <span style="font-size:12px;color:var(--text-secondary);">
-                                    👥 ${budgetPeople} чел · ${budgetDays} дней
-                                </span>
+                            <div class="budget-header">
+                                <span class="budget-title">💰 Бюджет на поездку</span>
+                                <span class="budget-people">👥 ${budgetPeople} чел · ${budgetDays} дней</span>
                             </div>
                             <div class="budget-days-selector">
                                 <button data-days="7" class="${budgetDays === 7 ? 'active' : ''}">7 дней</button>
@@ -3939,19 +4080,19 @@
                                 <button data-days="21" class="${budgetDays === 21 ? 'active' : ''}">21 день</button>
                             </div>
                             <div class="budget-row">
-                                <span class="budget-label">✈️ Перелёт (2 чел, туда-обратно)</span>
+                                <span class="budget-label">✈️ Перелёт</span>
                                 <span class="budget-value">${budget.flightTotal ? budget.flightTotal.toLocaleString() : '—'} ₽</span>
                             </div>
                             <div class="budget-row">
-                                <span class="budget-label">🚕 Трансфер от/до аэропорта</span>
+                                <span class="budget-label">🚕 Трансфер</span>
                                 <span class="budget-value">${budget.transfer ? budget.transfer.toLocaleString() : '—'} ₽</span>
                             </div>
                             <div class="budget-row">
-                                <span class="budget-label">🏨 Проживание (отель 4★, 1 ночь на двоих)</span>
+                                <span class="budget-label">🏨 Отель (1 ночь)</span>
                                 <span class="budget-value">${budget.hotelPerNight ? budget.hotelPerNight.toLocaleString() : '—'} ₽</span>
                             </div>
                             <div class="budget-row">
-                                <span class="budget-label">🍽️ Питание (на 2х в день)</span>
+                                <span class="budget-label">🍽️ Питание (в день)</span>
                                 <span class="budget-value">${budget.mealForTwo ? budget.mealForTwo.toLocaleString() : '—'} ₽</span>
                             </div>
                             <div class="budget-row" style="border-bottom:2px solid var(--accent);padding-bottom:6px;">
@@ -3961,6 +4102,22 @@
                             <div class="budget-note">
                                 💡 Расчёт примерный, включает перелёт на 2 человек, трансфер (туда и обратно), 
                                 проживание в отеле 4★ и питание на 2 человек.
+                            </div>
+                            <div class="trip-partner">
+                                <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                                    <span style="font-size:18px;">✈️</span>
+                                    <span style="font-weight:600;color:var(--text);">Trip.com — выгодные билеты и отели</span>
+                                </div>
+                                <div style="font-size:12px;line-height:1.6;">
+                                    🏨 Бронируйте отели и авиабилеты на Trip.com с оплатой картой МИР.
+                                    Зарегистрируйтесь по ссылке ниже и получите приветственный подарок!
+                                </div>
+                                <a href="https://ru.trip.com/sale/4283/referee.html?locale=ru-RU&referCode=FFMMN7" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer" 
+                                   class="trip-link">
+                                    🎁 Получить подарок
+                                </a>
                             </div>
                         </div>
 
@@ -4019,7 +4176,6 @@
                     });
                 }
 
-                // СКРОЛЛ ВВЕРХ ПРИ ОТКРЫТИИ
                 if (detailCard) {
                     detailCard.scrollTop = 0;
                     requestAnimationFrame(() => {
@@ -4043,6 +4199,15 @@
                 if (overlay) overlay.classList.remove('active');
                 document.body.style.overflow = '';
             }
+
+            // Закрытие по Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (overlay && overlay.classList.contains('active')) closeDetail();
+                    if (compareOverlay && compareOverlay.classList.contains('active')) closeCompare();
+                    if (plugModalOverlay && plugModalOverlay.classList.contains('active')) closePlugModal();
+                }
+            });
 
             // ===== КНОПКИ =====
             if (addCompareBtn) {
