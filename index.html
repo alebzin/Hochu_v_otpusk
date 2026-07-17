@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>В отпуск!</title>
     <style>
+        /* --- styles (без изменений) --- */
         :root {
             --bg: #f2f7fe;
             --bg-card: #ffffff;
@@ -54,7 +55,6 @@
             transition: background 0.3s, color 0.3s;
         }
         .app { max-width: 600px; width: 100%; }
-
         .header {
             display: flex;
             flex-wrap: wrap;
@@ -168,7 +168,6 @@
             color: var(--text-secondary);
             opacity: 0.7;
         }
-
         .filters-wrapper {
             margin-bottom: 12px;
             position: relative;
@@ -310,7 +309,6 @@
         @media (max-width: 420px) {
             .filters .filter-group { min-width: 100%; }
         }
-
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -465,7 +463,6 @@
         [data-theme="dark"] .card-weather .comfort-badge.good { background: #3a3a1a; color: #e8d060; }
         [data-theme="dark"] .card-weather .comfort-badge.ok { background: #4a3a1a; color: #f0d070; }
         [data-theme="dark"] .card-weather .comfort-badge.bad { background: #3a1a1a; color: #df8f8f; }
-
         .compare-checkbox {
             position: absolute;
             top: 6px;
@@ -493,7 +490,6 @@
         .compare-checkbox:hover {
             transform: scale(1.05);
         }
-
         .detail-overlay {
             position: fixed;
             inset: 0;
@@ -530,7 +526,6 @@
             0% { opacity: 0; transform: translateY(40px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
         .detail-hero {
             position: relative;
             width: 100%;
@@ -607,7 +602,6 @@
         }
         .detail-close:hover { background: rgba(0, 0, 0, 0.7); transform: scale(1.05); }
         .detail-close:active { transform: scale(0.92); }
-
         .detail-content-wrapper { padding: 6px 18px 18px; }
         .detail-block {
             background: var(--tag-bg);
@@ -673,7 +667,6 @@
             justify-content: flex-end;
             gap: 4px;
         }
-        
         .budget-calculator {
             background: var(--bg-card);
             border-radius: 14px;
@@ -760,7 +753,6 @@
         .budget-calculator .trip-partner .trip-link:active {
             transform: scale(0.97);
         }
-
         .budget-days-selector {
             display: flex;
             gap: 6px;
@@ -787,7 +779,6 @@
         .budget-days-selector button:hover:not(.active) {
             border-color: var(--accent);
         }
-
         .detail-temp-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -818,7 +809,6 @@
             background: #1a3a5a;
             color: #8fcfef;
         }
-
         .rain-details-block {
             background: var(--tag-bg);
             border-radius: 14px;
@@ -852,7 +842,6 @@
             margin-top: 4px;
             line-height: 1.4;
         }
-
         .sights-festivals-tips-block {
             background: var(--tag-bg);
             border-radius: 14px;
@@ -904,7 +893,6 @@
             border-radius: 10px;
             border: 1px solid var(--border);
         }
-
         .checklist-block {
             background: var(--bg-card);
             border-radius: 14px;
@@ -944,7 +932,6 @@
             color: var(--text);
             margin-bottom: 6px;
         }
-
         .detail-actions {
             display: flex;
             flex-wrap: wrap;
@@ -981,7 +968,6 @@
             display: none;
         }
         .detail-actions .compare-from-detail.visible { display: inline-flex; }
-
         .season-tag {
             font-size: 10px;
             font-weight: 600;
@@ -1052,7 +1038,6 @@
             font-weight: 500;
             color: var(--text);
         }
-
         .plug-tag {
             display: inline-block;
             padding: 2px 10px;
@@ -1074,7 +1059,6 @@
         }
         .plug-tag:active { transform: scale(0.95); }
         .plug-tag .plug-icon { margin-right: 2px; }
-
         .compare-bar {
             position: fixed;
             bottom: 0;
@@ -1163,7 +1147,6 @@
             border: 1px solid var(--border);
         }
         .compare-bar .compare-actions .clear-btn:active { transform: scale(0.95); }
-
         .compare-overlay {
             position: fixed;
             inset: 0;
@@ -1357,7 +1340,6 @@
         @media (min-width: 600px) {
             .grid { gap: 14px; }
         }
-
         .visa-difficulty {
             display: inline-block;
             padding: 2px 10px;
@@ -1389,7 +1371,6 @@
             background: #3a1a1a;
             color: #df8f8f;
         }
-        
         .visa-header-tag {
             display: inline-block;
             padding: 2px 10px;
@@ -1401,7 +1382,6 @@
             color: var(--text);
             margin-left: 6px;
         }
-
         .plug-svg-container {
             display: flex;
             justify-content: center;
@@ -1416,7 +1396,6 @@
         [data-theme="dark"] .plug-svg-container svg {
             filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
         }
-
         .plug-modal-overlay {
             position: fixed;
             inset: 0;
@@ -2045,46 +2024,235 @@
                     ], temps: [14, 17, 21, 26, 32, 35, 36, 36, 33, 28, 21, 16], humidity: "сухой",
                     language: "Арабский, английский", plug: "G", vaccines: "Гепатит А", tips: "Не принято",
                     medicine: "⭐⭐⭐", shopping: "Золото, финики", cuisine: "Манди, кебаб" },
+
+                // ===== НОВЫЕ СТРАНЫ СНГ =====
+                { id: "russia", name: "Россия (Москва)", city: "Москва", flag: "🇷🇺", currency: "RUB",
+                    visa: "Не нужна", rainSeason: "–", rainDetails: "Умеренный климат, лето комфортное.",
+                    waterTemps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
+                    ],
+                    footnote: "Для граждан РФ", budget: "low", flightDuration: "short", flightPrice: "50–150",
+                    hotelPrice: 80,
+                    typeTags: ['culture', 'party', 'shopping'],
+                    sights: ['🏛️ Красная площадь', '🏰 Кремль', '🎭 Большой театр', '🛍️ ГУМ', '🌳 Парк Горького'],
+                    temps: [-8, -7, -2, 6, 14, 18, 21, 19, 13, 6, -1, -6],
+                    humidity: "умеренный", language: "Русский", plug: "C/F", vaccines: "Нет", tips: "10%",
+                    medicine: "⭐⭐⭐⭐⭐",
+                    shopping: "Сувениры, шубы, икра", cuisine: "Борщ, пельмени, блины" },
+
+                { id: "belarus", name: "Беларусь", city: "Минск", flag: "🇧🇾", currency: "BYN", visa: "Не нужна",
+                    rainSeason: "–", rainDetails: "Умеренный континентальный климат.",
+                    waterTemps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
+                    ],
+                    footnote: "до 30 дней без визы", budget: "low", flightDuration: "short", flightPrice: "80–200",
+                    hotelPrice: 60,
+                    typeTags: ['culture', 'shopping'],
+                    sights: ['🏛️ Площадь Независимости', '🕍 Троицкое предместье', '🏰 Мирский замок',
+                        '🌳 Несвижский парк', '🎭 Национальный театр'
+                    ],
+                    temps: [-6, -6, -1, 6, 13, 17, 19, 18, 12, 6, 0, -5],
+                    humidity: "умеренный", language: "Белорусский, русский", plug: "C/F", vaccines: "Нет",
+                    tips: "10%", medicine: "⭐⭐⭐",
+                    shopping: "Льняные изделия, сувениры", cuisine: "Драники, мачанка" },
+
                 { id: "uzbekistan", name: "Узбекистан", city: "Самарканд", flag: "🇺🇿", currency: "UZS",
                     visa: "Не нужна", rainSeason: "–", rainDetails: "Резко континентальный. В июле +40° в тени!",
                     waterTemps: [4, 5, 10, 16, 22, 27, 29, 27, 22, 16, 10, 5],
-                    seasons: ['low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
-                    ], footnote: "", budget: "low", flightDuration: "short", flightPrice: "150–300",
+                    seasons: ['low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
+                    ],
+                    footnote: "до 30 дней без визы", budget: "low", flightDuration: "short", flightPrice: "150–300",
                     hotelPrice: 70,
                     typeTags: ['culture', 'shopping'],
-                    sights: ['🏛️ Площадь Регистан', '🕌 Мечеть Биби-Ханым', '⚰️ Мавзолей Гур-Эмир',
-                        '🏛️ Обсерватория Улугбека', '🌿 Шахи-Зинда'
-                    ], temps: [1, 3, 8, 16, 22, 27, 29, 27, 22, 15, 8, 3], humidity: "сухой",
-                    language: "Узбекский, русский", plug: "C/F", vaccines: "Гепатит А, тиф", tips: "5-10%",
+                    sights: ['🏛️ Регистан', '🕌 Биби-Ханым', '⚰️ Гур-Эмир', '🏛️ Обсерватория Улугбека',
+                        '🌿 Шахи-Зинда'
+                    ],
+                    temps: [1, 3, 8, 16, 22, 27, 29, 27, 22, 15, 8, 3],
+                    humidity: "сухой", language: "Узбекский, русский", plug: "C/F", vaccines: "Гепатит А, тиф",
+                    tips: "5-10%",
                     medicine: "⭐⭐", shopping: "Ковры, керамика, шёлк",
                     cuisine: "Плов, самса, лагман" },
-                { id: "sochi", name: "Россия (Сочи)", city: "Сочи", flag: "🇷🇺", currency: "RUB", visa: "Не нужна",
-                    rainSeason: "–", rainDetails: "Субтропики. Море прогревается к июлю.",
-                    waterTemps: [10, 10, 11, 14, 18, 22, 25, 26, 24, 20, 16, 12],
-                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
-                    ], footnote: "", budget: "low", flightDuration: "short", flightPrice: "100–200",
-                    hotelPrice: 80,
-                    typeTags: ['family', 'ski', 'wellness', 'beach'],
-                    sights: ['🏔️ Красная Поляна', '🌳 Дендрарий', '⛵ Морской порт', '🏛️ Олимпийский парк',
-                        '🌊 Водопады Агур'
-                    ], temps: [5, 6, 9, 15, 20, 25, 27, 27, 23, 18, 13, 8], humidity: "влажный",
-                    language: "Русский", plug: "C/F", vaccines: "Нет", tips: "10%", medicine: "⭐⭐⭐⭐",
-                    shopping: "Субтропические растения, мёд", cuisine: "Шашлык, хачапури" },
+
+                { id: "kyrgyzstan", name: "Кыргызстан", city: "Бишкек", flag: "🇰🇬", currency: "KGS",
+                    visa: "Не нужна", rainSeason: "–", rainDetails: "Климат резко континентальный.",
+                    waterTemps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
+                    ],
+                    footnote: "до 60 дней без визы", budget: "low", flightDuration: "short", flightPrice: "120–250",
+                    hotelPrice: 50,
+                    typeTags: ['culture', 'ski', 'shopping'],
+                    sights: ['🏛️ Площадь Ала-Тоо', '🏔️ Ущелье Ала-Арча', '🌊 Озеро Иссык-Куль', '🏛️ Ошский базар',
+                        '⛰️ Тянь-Шань'
+                    ],
+                    temps: [-5, -4, 3, 12, 18, 23, 26, 24, 19, 11, 3, -3],
+                    humidity: "сухой", language: "Кыргызский, русский", plug: "C/F", vaccines: "Гепатит А",
+                    tips: "5-10%",
+                    medicine: "⭐⭐", shopping: "Войлочные изделия, сувениры",
+                    cuisine: "Бешбармак, курут" },
+
+                { id: "tajikistan", name: "Таджикистан", city: "Душанбе", flag: "🇹🇯", currency: "TJS",
+                    visa: "Не нужна", rainSeason: "–", rainDetails: "Климат субтропический, сухой.",
+                    waterTemps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
+                    ],
+                    footnote: "до 30 дней без визы", budget: "low", flightDuration: "short", flightPrice: "130–280",
+                    hotelPrice: 55,
+                    typeTags: ['culture', 'shopping'],
+                    sights: ['🏛️ Площадь Исмоила Сомони', '🌳 Ботанический сад', '🏔️ Памир', '🕌 Мечеть Ходжа Якуб',
+                        '🏛️ Музей национальных инструментов'
+                    ],
+                    temps: [-1, 1, 7, 15, 21, 27, 30, 28, 23, 16, 9, 2],
+                    humidity: "сухой", language: "Таджикский, русский", plug: "C/F", vaccines: "Гепатит А, тиф",
+                    tips: "5-10%",
+                    medicine: "⭐⭐", shopping: "Сувениры, ковры, чай",
+                    cuisine: "Плов, курутоб" },
+
+                { id: "turkmenistan", name: "Туркменистан", city: "Ашхабад", flag: "🇹🇲", currency: "TMT",
+                    visa: "Виза", rainSeason: "–", rainDetails: "Пустынный климат, жаркое лето.",
+                    waterTemps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    seasons: ['low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
+                    ],
+                    footnote: "Сложный визовый режим", budget: "medium", flightDuration: "short",
+                    flightPrice: "200–350",
+                    hotelPrice: 100,
+                    typeTags: ['culture', 'shopping'],
+                    sights: ['🏛️ Мраморный комплекс', '🕌 Мечеть Гаркыз', '🏜️ Пустыня Каракумы', '🏛️ Старый Ниса',
+                        '🌊 Каспийское море'
+                    ],
+                    temps: [0, 2, 8, 17, 24, 30, 33, 31, 25, 17, 9, 3],
+                    humidity: "сухой", language: "Туркменский, русский", plug: "C/F", vaccines: "Гепатит А",
+                    tips: "10%",
+                    medicine: "⭐⭐", shopping: "Ковры, сувениры", cuisine: "Плов, манты" },
+
+                { id: "armenia", name: "Армения", city: "Ереван", flag: "🇦🇲", currency: "AMD", visa: "Не нужна",
+                    rainSeason: "–", rainDetails: "Континентальный климат.",
+                    waterTemps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
+                    ],
+                    footnote: "до 180 дней без визы", budget: "low", flightDuration: "short", flightPrice: "100–220",
+                    hotelPrice: 55,
+                    typeTags: ['culture', 'family', 'shopping'],
+                    sights: ['🏛️ Площадь Республики', '🕍 Кафедральный собор', '🏛️ Гарни', '🌋 Севан',
+                        '🍷 Винодельни'
+                    ],
+                    temps: [-4, -3, 4, 12, 18, 24, 27, 27, 22, 14, 6, -1],
+                    humidity: "сухой", language: "Армянский, русский", plug: "C/F", vaccines: "Нет", tips: "10%",
+                    medicine: "⭐⭐⭐",
+                    shopping: "Сувениры, армянский коньяк", cuisine: "Хаш, долма, лаваш" },
+
+                { id: "azerbaijan", name: "Азербайджан", city: "Баку", flag: "🇦🇿", currency: "AZN",
+                    visa: "Не нужна", rainSeason: "–", rainDetails: "Субтропический климат, ветрено.",
+                    waterTemps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
+                    ],
+                    footnote: "до 90 дней без визы", budget: "low", flightDuration: "short", flightPrice: "100–220",
+                    hotelPrice: 60,
+                    typeTags: ['culture', 'shopping'],
+                    sights: ['🏛️ Площадь фонтанов', '🕌 Девичья башня', '🌊 Бакинская бухта', '🏛️ Мечеть Тезепир',
+                        '🎭 Театр оперы и балета'
+                    ],
+                    temps: [3, 4, 8, 14, 20, 25, 28, 27, 23, 17, 11, 6],
+                    humidity: "сухой", language: "Азербайджанский, русский", plug: "C/F", vaccines: "Нет",
+                    tips: "10%",
+                    medicine: "⭐⭐⭐", shopping: "Ковры, сувениры, чай",
+                    cuisine: "Шашлык, плов, долма" },
+
+                { id: "moldova", name: "Молдова", city: "Кишинёв", flag: "🇲🇩", currency: "MDL", visa: "Не нужна",
+                    rainSeason: "–", rainDetails: "Умеренный климат.",
+                    waterTemps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
+                    ],
+                    footnote: "до 90 дней без визы", budget: "low", flightDuration: "short", flightPrice: "80–200",
+                    hotelPrice: 50,
+                    typeTags: ['culture', 'shopping'],
+                    sights: ['🏛️ Площадь Великого национального собрания', '🕍 Кафедральный собор',
+                        '🍷 Подземные города (винные погреба)',
+                        '🏛️ Триумфальная арка', '🌳 Парк Долина роз'
+                    ],
+                    temps: [-4, -3, 3, 11, 18, 22, 24, 24, 19, 12, 4, -1],
+                    humidity: "умеренный", language: "Молдавский, русский", plug: "C/F", vaccines: "Нет",
+                    tips: "10%",
+                    medicine: "⭐⭐⭐", shopping: "Вино, сувениры", cuisine: "Мамалыга, сармале" },
+
                 { id: "georgia", name: "Грузия", city: "Батуми", flag: "🇬🇪", currency: "GEL", visa: "Не нужна",
                     rainSeason: "Осень–Зима", rainDetails: "Осенью и зимой частые затяжные дожди.",
                     waterTemps: [9, 8, 9, 12, 17, 21, 24, 25, 23, 19, 15, 11],
-                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
-                    ], footnote: "", budget: "low", flightDuration: "short", flightPrice: "150–300",
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
+                    ],
+                    footnote: "до 365 дней без визы", budget: "low", flightDuration: "short", flightPrice: "150–300",
                     hotelPrice: 70,
                     typeTags: ['culture', 'family', 'beach', 'shopping'],
                     sights: ['🏙️ Старый Батуми', '🌿 Ботанический сад', '🍷 Кахетия', '🏔️ Казбек',
                         '🕍 Монастырь Джвари'
-                    ], temps: [7, 7, 10, 15, 20, 25, 27, 27, 23, 18, 13, 9], humidity: "влажный",
-                    language: "Грузинский, русский", plug: "C/F", vaccines: "Нет", tips: "10%", medicine: "⭐⭐⭐",
-                    shopping: "Вино, хачапури, сувениры", cuisine: "Хачапури, хинкали" },
+                    ],
+                    temps: [7, 7, 10, 15, 20, 25, 27, 27, 23, 18, 13, 9],
+                    humidity: "влажный", language: "Грузинский, русский", plug: "C/F", vaccines: "Нет",
+                    tips: "10%",
+                    medicine: "⭐⭐⭐", shopping: "Вино, хачапури, сувениры",
+                    cuisine: "Хачапури, хинкали" },
+
+                { id: "sochi", name: "Россия (Сочи)", city: "Сочи", flag: "🇷🇺", currency: "RUB", visa: "Не нужна",
+                    rainSeason: "–", rainDetails: "Субтропики. Море прогревается к июлю.",
+                    waterTemps: [10, 10, 11, 14, 18, 22, 25, 26, 24, 20, 16, 12],
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
+                    ],
+                    footnote: "Для граждан РФ", budget: "low", flightDuration: "short", flightPrice: "100–200",
+                    hotelPrice: 80,
+                    typeTags: ['family', 'ski', 'wellness', 'beach'],
+                    sights: ['🏔️ Красная Поляна', '🌳 Дендрарий', '⛵ Морской порт', '🏛️ Олимпийский парк',
+                        '🌊 Водопады Агур'
+                    ],
+                    temps: [5, 6, 9, 15, 20, 25, 27, 27, 23, 18, 13, 8],
+                    humidity: "влажный", language: "Русский", plug: "C/F", vaccines: "Нет", tips: "10%",
+                    medicine: "⭐⭐⭐⭐",
+                    shopping: "Субтропические растения, мёд", cuisine: "Шашлык, хачапури" },
+
+                { id: "kazakhstan", name: "Казахстан", city: "Алматы", flag: "🇰🇿", currency: "KZT",
+                    visa: "Не нужна", rainSeason: "–", rainDetails: "Зимой — горнолыжка.",
+                    waterTemps: [3, 3, 6, 11, 16, 20, 23, 22, 18, 12, 7, 4],
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
+                    ],
+                    footnote: "до 30 дней без визы", budget: "low", flightDuration: "short", flightPrice: "100–250",
+                    hotelPrice: 60,
+                    typeTags: ['ski', 'culture', 'shopping'],
+                    sights: ['🏔️ Каток Медео', '🏛️ Зелёный базар', '⛰️ Кок-Тобе', '🌲 Чарынский каньон',
+                        '🏔️ Алматинские горы'
+                    ],
+                    temps: [-6, -4, 2, 11, 17, 22, 25, 24, 18, 9, 2, -4],
+                    humidity: "сухой", language: "Казахский, русский", plug: "C/F", vaccines: "Нет", tips: "10%",
+                    medicine: "⭐⭐⭐",
+                    shopping: "Сувениры, шерсть, кожа", cuisine: "Бешбармак, кумыс" },
+
+                { id: "ukraine", name: "Украина", city: "Киев", flag: "🇺🇦", currency: "UAH", visa: "Не нужна",
+                    rainSeason: "–", rainDetails: "Умеренный климат.",
+                    waterTemps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
+                    ],
+                    footnote: "до 90 дней без визы", budget: "low", flightDuration: "short", flightPrice: "80–200",
+                    hotelPrice: 55,
+                    typeTags: ['culture', 'shopping'],
+                    sights: ['🏛️ Майдан Незалежности', '🕍 Софийский собор', '🌊 Днепр',
+                        '🏛️ Золотые ворота', '🎭 Театр оперы и балета'
+                    ],
+                    temps: [-5, -4, 1, 9, 16, 20, 22, 21, 16, 10, 3, -3],
+                    humidity: "умеренный", language: "Украинский, русский", plug: "C/F", vaccines: "Нет",
+                    tips: "10%",
+                    medicine: "⭐⭐⭐", shopping: "Сувениры, вышивка", cuisine: "Борщ, вареники" },
+
+                // ===== ОСТАЛЬНЫЕ СТРАНЫ (без изменений) =====
                 { id: "goa", name: "Индия (Гоа)", city: "Гоа", flag: "🇮🇳", currency: "INR", visa: "Электронная",
                     rainSeason: "Июн–Сен", rainDetails: "С июня по сентябрь — сильные муссонные дожди.",
                     waterTemps: [27, 27, 28, 29, 29, 28, 27, 27, 27, 28, 28, 27],
@@ -2115,8 +2283,8 @@
                 { id: "france", name: "Франция", city: "Ницца", flag: "🇫🇷", currency: "EUR", visa: "Шенген",
                     rainSeason: "–", rainDetails: "Лазурный берег: мягкий климат.",
                     waterTemps: [13, 13, 14, 16, 19, 22, 24, 25, 23, 20, 17, 15],
-                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
                     ], footnote: "", budget: "high", flightDuration: "medium", flightPrice: "300–500",
                     hotelPrice: 280,
                     typeTags: ['romantic', 'culture', 'yacht', 'beach', 'shopping'],
@@ -2129,8 +2297,8 @@
                 { id: "uk", name: "Великобритания", city: "Лондон", flag: "🇬🇧", currency: "GBP", visa: "Виза",
                     rainSeason: "Круглый год", rainDetails: "Дожди 200 дней в году. Берите зонт всегда!",
                     waterTemps: [7, 7, 8, 10, 13, 16, 18, 19, 17, 14, 11, 8],
-                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
                     ], footnote: "требуется отдельная виза", budget: "high", flightDuration: "medium",
                     flightPrice: "300–550", hotelPrice: 250,
                     typeTags: ['culture', 'party', 'shopping'],
@@ -2143,8 +2311,8 @@
                 { id: "germany", name: "Германия", city: "Берлин", flag: "🇩🇪", currency: "EUR", visa: "Шенген",
                     rainSeason: "–", rainDetails: "Умеренный климат. Дожди круглый год.",
                     waterTemps: [2, 2, 4, 8, 13, 17, 19, 20, 17, 13, 7, 3],
-                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
                     ], footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "200–400",
                     hotelPrice: 160,
                     typeTags: ['culture', 'party', 'shopping'],
@@ -2224,8 +2392,8 @@
                 { id: "morocco", name: "Марокко", city: "Агадир", flag: "🇲🇦", currency: "MAD", visa: "Не нужна",
                     rainSeason: "–", rainDetails: "Океан холодный (течение).",
                     waterTemps: [16, 16, 17, 18, 19, 20, 21, 22, 21, 20, 18, 17],
-                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
                     ], footnote: "", budget: "low", flightDuration: "medium", flightPrice: "250–450",
                     hotelPrice: 80,
                     typeTags: ['culture', 'family', 'beach', 'shopping'],
@@ -2238,8 +2406,8 @@
                 { id: "tunisia", name: "Тунис", city: "Тунис", flag: "🇹🇳", currency: "TND", visa: "Не нужна",
                     rainSeason: "–", rainDetails: "Средиземноморский климат.",
                     waterTemps: [15, 15, 16, 18, 20, 23, 26, 27, 25, 23, 20, 16],
-                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
                     ], footnote: "", budget: "low", flightDuration: "short", flightPrice: "200–350",
                     hotelPrice: 60,
                     typeTags: ['family', 'culture', 'beach'],
@@ -2290,19 +2458,6 @@
                     language: "Испанский, английский", plug: "A/B", vaccines: "Гепатит А, тиф", tips: "10%",
                     medicine: "⭐⭐", shopping: "Ром, сигары, янтарь",
                     cuisine: "Санкочо, манго" },
-                { id: "kazakhstan", name: "Казахстан", city: "Алматы", flag: "🇰🇿", currency: "KZT",
-                    visa: "Не нужна", rainSeason: "–", rainDetails: "Зимой — горнолыжка.",
-                    waterTemps: [3, 3, 6, 11, 16, 20, 23, 22, 18, 12, 7, 4],
-                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
-                    ], footnote: "", budget: "low", flightDuration: "short", flightPrice: "100–250",
-                    hotelPrice: 60,
-                    typeTags: ['ski', 'culture', 'shopping'],
-                    sights: ['🏔️ Каток Медео', '🏛️ Зелёный базар', '⛰️ Кок-Тобе', '🌲 Чарынский каньон',
-                        '🏔️ Алматинские горы'
-                    ], temps: [-6, -4, 2, 11, 17, 22, 25, 24, 18, 9, 2, -4], humidity: "сухой",
-                    language: "Казахский, русский", plug: "C/F", vaccines: "Нет", tips: "10%", medicine: "⭐⭐⭐",
-                    shopping: "Сувениры, шерсть, кожа", cuisine: "Бешбармак, кумыс" },
                 { id: "kamchatka", name: "Камчатка", city: "Камчатка", flag: "🇷🇺", currency: "RUB",
                     visa: "Не нужна", rainSeason: "–", rainDetails: "Лето +14°, одеваться как зимой.",
                     waterTemps: [0, 0, 1, 3, 5, 8, 10, 11, 10, 7, 3, 1],
@@ -2319,8 +2474,8 @@
                 { id: "austria", name: "Австрия", city: "Вена", flag: "🇦🇹", currency: "EUR", visa: "Шенген",
                     rainSeason: "–", rainDetails: "Альпийский климат.",
                     waterTemps: [4, 4, 6, 10, 15, 18, 20, 21, 18, 14, 9, 5],
-                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
                     ], footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "250–450",
                     hotelPrice: 180,
                     typeTags: ['culture', 'ski', 'romantic', 'shopping'],
@@ -2333,8 +2488,8 @@
                 { id: "belgium", name: "Бельгия", city: "Брюссель", flag: "🇧🇪", currency: "EUR", visa: "Шенген",
                     rainSeason: "–", rainDetails: "Умеренный океанический климат.",
                     waterTemps: [6, 5, 7, 10, 13, 16, 18, 19, 17, 14, 10, 7],
-                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
                     ], footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "250–450",
                     hotelPrice: 160,
                     typeTags: ['culture', 'party', 'romantic', 'shopping'],
@@ -2346,8 +2501,8 @@
                 { id: "croatia", name: "Хорватия", city: "Дубровник", flag: "🇭🇷", currency: "EUR", visa: "Шенген",
                     rainSeason: "–", rainDetails: "Средиземноморский климат.",
                     waterTemps: [13, 12, 13, 15, 19, 22, 25, 26, 24, 21, 17, 14],
-                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
                     ], footnote: "", budget: "medium", flightDuration: "medium", flightPrice: "250–450",
                     hotelPrice: 150,
                     typeTags: ['yacht', 'culture', 'family', 'beach'],
@@ -2360,8 +2515,8 @@
                 { id: "canada", name: "Канада", city: "Ванкувер", flag: "🇨🇦", currency: "CAD", visa: "Виза",
                     rainSeason: "–", rainDetails: "В Ванкувере дождливо круглый год.",
                     waterTemps: [7, 7, 8, 10, 13, 16, 18, 18, 16, 13, 10, 8],
-                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
                     ], footnote: "требуется виза", budget: "high", flightDuration: "long", flightPrice: "700–1200",
                     hotelPrice: 200,
                     typeTags: ['culture', 'ski', 'family', 'shopping'],
@@ -2430,8 +2585,8 @@
                 { id: "cyprus", name: "Кипр", city: "Лимасол", flag: "🇨🇾", currency: "EUR", visa: "Шенген",
                     rainSeason: "–", rainDetails: "Средиземноморский климат.",
                     waterTemps: [16, 16, 17, 19, 22, 25, 27, 28, 27, 25, 21, 18],
-                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
                     ], footnote: "", budget: "medium", flightDuration: "short", flightPrice: "200–400",
                     hotelPrice: 130,
                     typeTags: ['family', 'culture', 'yacht', 'beach'],
@@ -2444,8 +2599,8 @@
                 { id: "bulgaria", name: "Болгария", city: "София", flag: "🇧🇬", currency: "BGN", visa: "Шенген",
                     rainSeason: "–", rainDetails: "Умеренный климат.",
                     waterTemps: [14, 14, 15, 17, 20, 23, 25, 26, 25, 23, 20, 17],
-                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
                     ], footnote: "", budget: "low", flightDuration: "short", flightPrice: "150–300",
                     hotelPrice: 70,
                     typeTags: ['family', 'culture', 'ski', 'beach'],
@@ -2458,8 +2613,8 @@
                 { id: "serbia", name: "Сербия", city: "Белград", flag: "🇷🇸", currency: "RSD", visa: "Не нужна",
                     rainSeason: "–", rainDetails: "Умеренный континентальный климат.",
                     waterTemps: [6, 6, 9, 13, 18, 22, 25, 25, 21, 16, 11, 7],
-                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium', 'low',
-                        'low'
+                    seasons: ['low', 'low', 'low', 'medium', 'medium', 'high', 'high', 'high', 'medium', 'medium',
+                        'low', 'low'
                     ], footnote: "до 30 дней", budget: "low", flightDuration: "short", flightPrice: "100–250",
                     hotelPrice: 60,
                     typeTags: ['culture', 'party'],
@@ -3239,6 +3394,133 @@
                         { icon: '🔌', text: 'Переходник', detail: 'Тип C/F' },
                         { icon: '🧥', text: 'Тёплая одежда', detail: 'Зимой холодно' }
                     ]
+                },
+                // Добавляем базовые данные для новых стран СНГ
+                'Россия (Москва)': {
+                    comfort: { jan: 'bad', feb: 'bad', mar: 'bad', apr: 'good', may: 'good', jun: 'perfect', jul: 'perfect',
+                        aug: 'perfect', sep: 'good', oct: 'good', nov: 'bad', dec: 'bad' },
+                    cloud: { jan: 60, feb: 55, mar: 50, apr: 45, may: 40, jun: 35, jul: 30, aug: 30, sep: 35, oct: 45,
+                        nov: 55, dec: 60 },
+                    budget: { meal: 1500, transfer: 2000, excursions: 4000, daily: 6000 },
+                    festivals: ['🎄 Новый год', '🎭 День города (сент)'],
+                    visa: { difficulty: 'easy', time: '0', notes: 'для граждан РФ' },
+                    checklist: [
+                        { icon: '🧥', text: 'Тёплая одежда', detail: 'Зимой холодно' },
+                        { icon: '👟', text: 'Удобная обувь', detail: 'Для прогулок' },
+                        { icon: '🔌', text: 'Переходник', detail: 'Тип C/F' }
+                    ]
+                },
+                'Беларусь': {
+                    comfort: { jan: 'bad', feb: 'bad', mar: 'bad', apr: 'good', may: 'good', jun: 'perfect', jul: 'perfect',
+                        aug: 'perfect', sep: 'good', oct: 'good', nov: 'bad', dec: 'bad' },
+                    cloud: { jan: 60, feb: 55, mar: 50, apr: 45, may: 40, jun: 35, jul: 30, aug: 30, sep: 35, oct: 45,
+                        nov: 55, dec: 60 },
+                    budget: { meal: 600, transfer: 1000, excursions: 2000, daily: 3000 },
+                    festivals: ['🎄 Новый год', '🏛️ День Независимости (июль)'],
+                    visa: { difficulty: 'easy', time: '0', notes: 'до 30 дней без визы' },
+                    checklist: [
+                        { icon: '🧥', text: 'Тёплая одежда', detail: 'Зимой холодно' },
+                        { icon: '👟', text: 'Удобная обувь', detail: 'Для прогулок' },
+                        { icon: '🔌', text: 'Переходник', detail: 'Тип C/F' }
+                    ]
+                },
+                'Кыргызстан': {
+                    comfort: { jan: 'bad', feb: 'bad', mar: 'ok', apr: 'good', may: 'good', jun: 'perfect', jul: 'perfect',
+                        aug: 'perfect', sep: 'good', oct: 'good', nov: 'bad', dec: 'bad' },
+                    cloud: { jan: 50, feb: 45, mar: 40, apr: 35, may: 30, jun: 25, jul: 20, aug: 20, sep: 25, oct: 30,
+                        nov: 40, dec: 50 },
+                    budget: { meal: 400, transfer: 800, excursions: 2000, daily: 2500 },
+                    festivals: ['🏔️ Фестиваль на Иссык-Куле (июль)', '🎭 День независимости (авг)'],
+                    visa: { difficulty: 'easy', time: '0', notes: 'до 60 дней без визы' },
+                    checklist: [
+                        { icon: '🧴', text: 'Солнцезащитный крем', detail: 'SPF 30+' },
+                        { icon: '🧥', text: 'Тёплая одежда', detail: 'Для гор' },
+                        { icon: '🔌', text: 'Переходник', detail: 'Тип C/F' }
+                    ]
+                },
+                'Таджикистан': {
+                    comfort: { jan: 'bad', feb: 'bad', mar: 'ok', apr: 'good', may: 'good', jun: 'perfect', jul: 'perfect',
+                        aug: 'perfect', sep: 'good', oct: 'good', nov: 'bad', dec: 'bad' },
+                    cloud: { jan: 50, feb: 45, mar: 40, apr: 35, may: 30, jun: 25, jul: 20, aug: 20, sep: 25, oct: 30,
+                        nov: 40, dec: 50 },
+                    budget: { meal: 400, transfer: 800, excursions: 2000, daily: 2500 },
+                    festivals: ['🏔️ Фестиваль в горах (июль)', '🎭 Навруз (март)'],
+                    visa: { difficulty: 'easy', time: '0', notes: 'до 30 дней без визы' },
+                    checklist: [
+                        { icon: '🧴', text: 'Солнцезащитный крем', detail: 'SPF 30+' },
+                        { icon: '🧥', text: 'Тёплая одежда', detail: 'Для гор' },
+                        { icon: '🔌', text: 'Переходник', detail: 'Тип C/F' }
+                    ]
+                },
+                'Туркменистан': {
+                    comfort: { jan: 'bad', feb: 'bad', mar: 'ok', apr: 'good', may: 'good', jun: 'bad', jul: 'bad',
+                        aug: 'bad', sep: 'ok', oct: 'good', nov: 'bad', dec: 'bad' },
+                    cloud: { jan: 40, feb: 35, mar: 30, apr: 25, may: 20, jun: 15, jul: 10, aug: 10, sep: 15, oct: 20,
+                        nov: 30, dec: 40 },
+                    budget: { meal: 800, transfer: 1500, excursions: 3000, daily: 4000 },
+                    festivals: ['🎭 День независимости (окт)', '🏜️ Фестиваль пустыни (апр)'],
+                    visa: { difficulty: 'hard', time: '30-45', notes: 'сложная виза' },
+                    checklist: [
+                        { icon: '📄', text: 'Все документы на визу', detail: 'Заранее' },
+                        { icon: '🧴', text: 'Солнцезащитный крем', detail: 'SPF 50+' },
+                        { icon: '🔌', text: 'Переходник', detail: 'Тип C/F' }
+                    ]
+                },
+                'Армения': {
+                    comfort: { jan: 'bad', feb: 'bad', mar: 'ok', apr: 'good', may: 'good', jun: 'perfect', jul: 'perfect',
+                        aug: 'perfect', sep: 'good', oct: 'good', nov: 'bad', dec: 'bad' },
+                    cloud: { jan: 50, feb: 45, mar: 40, apr: 35, may: 30, jun: 25, jul: 20, aug: 20, sep: 25, oct: 30,
+                        nov: 40, dec: 50 },
+                    budget: { meal: 600, transfer: 1000, excursions: 2000, daily: 3000 },
+                    festivals: ['🍷 Фестиваль вина (окт)', '🎭 День независимости (сент)'],
+                    visa: { difficulty: 'easy', time: '0', notes: 'до 180 дней без визы' },
+                    checklist: [
+                        { icon: '🧴', text: 'Солнцезащитный крем', detail: 'SPF 30+' },
+                        { icon: '🧥', text: 'Тёплая одежда', detail: 'Для гор' },
+                        { icon: '🔌', text: 'Переходник', detail: 'Тип C/F' }
+                    ]
+                },
+                'Азербайджан': {
+                    comfort: { jan: 'ok', feb: 'ok', mar: 'good', apr: 'good', may: 'perfect', jun: 'perfect', jul: 'bad',
+                        aug: 'bad', sep: 'good', oct: 'good', nov: 'ok', dec: 'ok' },
+                    cloud: { jan: 50, feb: 45, mar: 40, apr: 35, may: 30, jun: 25, jul: 20, aug: 20, sep: 25, oct: 30,
+                        nov: 40, dec: 50 },
+                    budget: { meal: 600, transfer: 1000, excursions: 2000, daily: 3000 },
+                    festivals: ['🎭 День независимости (май)', '🍷 Винный фестиваль (окт)'],
+                    visa: { difficulty: 'easy', time: '0', notes: 'до 90 дней без визы' },
+                    checklist: [
+                        { icon: '🧴', text: 'Солнцезащитный крем', detail: 'SPF 30+' },
+                        { icon: '👕', text: 'Лёгкая одежда', detail: 'Летом жарко' },
+                        { icon: '🔌', text: 'Переходник', detail: 'Тип C/F' }
+                    ]
+                },
+                'Молдова': {
+                    comfort: { jan: 'bad', feb: 'bad', mar: 'ok', apr: 'good', may: 'good', jun: 'perfect', jul: 'perfect',
+                        aug: 'perfect', sep: 'good', oct: 'good', nov: 'bad', dec: 'bad' },
+                    cloud: { jan: 60, feb: 55, mar: 50, apr: 45, may: 40, jun: 35, jul: 30, aug: 30, sep: 35, oct: 45,
+                        nov: 55, dec: 60 },
+                    budget: { meal: 500, transfer: 800, excursions: 2000, daily: 2500 },
+                    festivals: ['🍷 Фестиваль вина (окт)', '🎭 День независимости (авг)'],
+                    visa: { difficulty: 'easy', time: '0', notes: 'до 90 дней без визы' },
+                    checklist: [
+                        { icon: '🧥', text: 'Тёплая одежда', detail: 'Зимой холодно' },
+                        { icon: '👟', text: 'Удобная обувь', detail: 'Для прогулок' },
+                        { icon: '🔌', text: 'Переходник', detail: 'Тип C/F' }
+                    ]
+                },
+                'Украина': {
+                    comfort: { jan: 'bad', feb: 'bad', mar: 'bad', apr: 'good', may: 'good', jun: 'perfect', jul: 'perfect',
+                        aug: 'perfect', sep: 'good', oct: 'good', nov: 'bad', dec: 'bad' },
+                    cloud: { jan: 60, feb: 55, mar: 50, apr: 45, may: 40, jun: 35, jul: 30, aug: 30, sep: 35, oct: 45,
+                        nov: 55, dec: 60 },
+                    budget: { meal: 600, transfer: 1000, excursions: 2500, daily: 3500 },
+                    festivals: ['🎭 День независимости (авг)', '🍷 Винный фестиваль (сен)'],
+                    visa: { difficulty: 'easy', time: '0', notes: 'до 90 дней без визы' },
+                    checklist: [
+                        { icon: '🧥', text: 'Тёплая одежда', detail: 'Зимой холодно' },
+                        { icon: '👟', text: 'Удобная обувь', detail: 'Для прогулок' },
+                        { icon: '🔌', text: 'Переходник', detail: 'Тип C/F' }
+                    ]
                 }
             };
 
@@ -3309,7 +3591,15 @@
                 'RSD': 108,
                 'KZT': 449,
                 'UZS': 12400,
-                'GEL': 2.68
+                'GEL': 2.68,
+                'BYN': 3.2,
+                'KGS': 88.5,
+                'TJS': 10.8,
+                'TMT': 3.5,
+                'AMD': 388,
+                'AZN': 1.7,
+                'MDL': 17.7,
+                'UAH': 38.5
             };
 
             let cachedRates = { ...baseRates };
@@ -3385,7 +3675,7 @@
                 }
             }
 
-            // ===== ОСНОВНЫЕ ФУНКЦИИ =====
+            // ===== ОСНОВНЫЕ ФУНКЦИИ (без изменений) =====
             function getComfortForMonth(c, monthIndex) {
                 const monthNames = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
                 const key = monthNames[monthIndex];
@@ -3447,7 +3737,7 @@
                         flightPrice = parseInt(c.flightPrice.trim()) || 0;
                     }
                 }
-                const flightTotal = flightPrice * 2 * 2 * usdRate;
+                const flightTotal = flightPrice * 2 * people * usdRate;
                 
                 const hotelPriceUsd = c.hotelPrice || 100;
                 const hotelPerNight = Math.round(hotelPriceUsd * usdRate);
@@ -3496,7 +3786,7 @@
                 return '🥶';
             }
 
-            // ===== СОВЕТЫ =====
+            // ===== СОВЕТЫ (добавляем для новых стран) =====
             const countryTips = {
                 'Турция': '🇹🇷 Попробуйте турецкий завтрак с сырами и оливками. Обязательно посетите Памуккале — белые террасы с горячими источниками.',
                 'Таиланд': '🇹🇭 Используйте Grab для такси. Попробуйте том-ям и манго с клейким рисом. На Пхукете съездите на остров Пхи-Пхи.',
@@ -3547,7 +3837,17 @@
                 'Маврикий': '🇲🇺 Отличный дайвинг и снорклинг. Ботанический сад Паммуль — огромные водяные лилии.',
                 'Кипр': '🇨🇾 Попробуйте халлуми — местный сыр. Айя-Напа — пляжи и ночная жизнь. Троодос — горнолыжка.',
                 'Болгария': '🇧🇬 Солнечный берег — бюджетный пляжный отдых. В Софии — Александро-Невский собор.',
-                'Сербия': '🇷🇸 Попробуйте плескавицу — мясную лепёшку, и ракию — фруктовый бренди.'
+                'Сербия': '🇷🇸 Попробуйте плескавицу — мясную лепёшку, и ракию — фруктовый бренди.',
+                // Новые страны СНГ
+                'Россия (Москва)': '🇷🇺 Москва — сердце России. Посетите Красную площадь, Кремль и ГУМ. Попробуйте борщ в ресторане с историей.',
+                'Беларусь': '🇧🇾 Минск — город с богатой историей. Посетите Мирский и Несвижский замки. Попробуйте драники со сметаной.',
+                'Кыргызстан': '🇰🇬 Бишкек — ворота в Тянь-Шань. Посетите озеро Иссык-Куль и ущелье Ала-Арча. Попробуйте бешбармак.',
+                'Таджикистан': '🇹🇯 Душанбе — столица с восточным колоритом. Посетите Памирские горы и древний город Истаравшан.',
+                'Туркменистан': '🇹🇲 Ашхабад — город белого мрамора. Посетите руины Нисы и пустыню Каракумы. Виза — сложная, готовьте документы.',
+                'Армения': '🇦🇲 Ереван — древний город. Посетите храм Гарни, озеро Севан и попробуйте настоящий армянский коньяк.',
+                'Азербайджан': '🇦🇿 Баку — город ветров и огней. Посетите Девичью башню и Дворец Ширваншахов. Попробуйте кутабы.',
+                'Молдова': '🇲🇩 Кишинёв — центр виноделия. Обязательно посетите подземные винные погреба Cricova и попробуйте местные вина.',
+                'Украина': '🇺🇦 Киев — мать городов русских. Посетите Софийский собор и Майдан Незалежности. Попробуйте борщ и вареники.'
             };
 
             countriesData.forEach(c => {
@@ -3579,7 +3879,7 @@
             const flightLabels = { short: '✈️ До 4ч', medium: '✈️ 4-7ч', long: '✈️ 8+ч' };
             const budgetLabels = { low: '🟢 Низкий', medium: '🟡 Средний', high: '🔴 Высокий' };
 
-            // ===== DOM =====
+            // ===== DOM (без изменений) =====
             const grid = document.getElementById('cardsGrid');
             const monthSelect = document.getElementById('monthSelect');
             const overlay = document.getElementById('detailOverlay');
